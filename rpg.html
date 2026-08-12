@@ -199,6 +199,13 @@
             box-shadow: 0 2px 10px rgba(184, 115, 11, 0.3);
             transition: all var(--transition);
         }
+        /* 【新增】人生目标类型光晕 — 随玩家成长方向变换颜色 */
+        .hero-avatar.glow-career  { box-shadow: 0 0 12px 3px rgba(59,130,196,0.55), 0 2px 10px rgba(59,130,196,0.3); }
+        .hero-avatar.glow-skill   { box-shadow: 0 0 12px 3px rgba(149,117,205,0.55), 0 2px 10px rgba(149,117,205,0.3); }
+        .hero-avatar.glow-health  { box-shadow: 0 0 12px 3px rgba(45,157,90,0.55), 0 2px 10px rgba(45,157,90,0.3); }
+        .hero-avatar.glow-finance { box-shadow: 0 0 12px 3px rgba(241,196,15,0.55), 0 2px 10px rgba(241,196,15,0.3); }
+        .hero-avatar.glow-creative{ box-shadow: 0 0 12px 3px rgba(233,30,99,0.55), 0 2px 10px rgba(233,30,99,0.3); }
+        .hero-avatar.glow-multi   { box-shadow: 0 0 14px 4px rgba(184,115,11,0.5), 0 0 8px 2px rgba(159,122,234,0.4); }
         .hero-lv-badge {
             position: absolute;
             bottom: -3px;
@@ -557,6 +564,76 @@
         .modal .btn-group {
             justify-content: flex-end;
         }
+        /* 【新增】分步向导样式 */
+        .lg-wizard-steps { display:flex; align-items:center; justify-content:center; gap:4px; margin:10px 0 14px; }
+        .lg-step-dot { width:28px; height:28px; border-radius:50%; background:var(--border); color:var(--text3); font-size:0.7em; font-weight:700; display:flex; align-items:center; justify-content:center; transition:all var(--transition); flex-shrink:0; }
+        .lg-step-dot.active { background:var(--accent); color:#fff; transform:scale(1.15); }
+        .lg-step-dot.done { background:var(--success); color:#fff; }
+        .lg-step-line { flex:1; height:3px; background:var(--border); border-radius:2px; max-width:40px; transition:background var(--transition); }
+        .lg-step-line.done { background:var(--success); }
+        .lg-step-title { font-size:0.85em; font-weight:700; color:var(--text2); text-align:center; margin-bottom:12px; }
+        .lg-type-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+        .lg-type-card { display:flex; flex-direction:column; align-items:center; gap:4px; padding:14px 6px; border:2px solid var(--border); border-radius:10px; cursor:pointer; transition:all var(--transition); background:var(--bg2); }
+        .lg-type-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+        .lg-type-card.selected { border-color:var(--accent); background:rgba(var(--accent-rgb,91,74,255),0.08); box-shadow:0 0 10px rgba(91,74,255,0.2); }
+        .lg-type-icon { font-size:1.8em; }
+        .lg-type-label { font-size:0.66em; color:var(--text2); font-weight:600; }
+        .lg-months-slider { display:flex; flex-direction:column; align-items:center; gap:10px; padding:10px 0; }
+        .lg-months-slider input[type=range] { width:80%; height:6px; -webkit-appearance:none; background:var(--border); border-radius:3px; outline:none; }
+        .lg-months-slider input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; height:22px; border-radius:50%; background:var(--accent); cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
+        .lg-months-display { font-size:1.4em; font-weight:800; color:var(--accent); }
+        /* 【功能一】专注计时器样式 */
+        .focus-timer-ring { position:relative; width:160px; height:160px; margin:0 auto; }
+        .focus-timer-ring svg { transform:rotate(-90deg); }
+        .focus-timer-ring .ring-bg { fill:none; stroke:var(--border); stroke-width:8; }
+        .focus-timer-ring .ring-fg { fill:none; stroke:var(--accent); stroke-width:8; stroke-linecap:round; transition:stroke-dashoffset 1s linear; }
+        .focus-timer-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; }
+        .focus-timer-center .time { font-size:2em; font-weight:800; font-family:var(--pixel-font); color:var(--accent); line-height:1; }
+        .focus-timer-center .label { font-size:0.6em; color:var(--text3); margin-top:4px; }
+        .focus-stat-row { display:flex; justify-content:space-around; margin:12px 0; }
+        .focus-stat { text-align:center; }
+        .focus-stat .val { font-size:1.2em; font-weight:800; }
+        .focus-stat .lbl { font-size:0.62em; color:var(--text3); }
+        /* 【功能五】场景主题切换器 */
+        .scene-switcher { display:flex; gap:6px; align-items:center; }
+        .scene-btn { width:28px; height:28px; border-radius:50%; border:2px solid var(--border); cursor:pointer; transition:all var(--transition); display:flex; align-items:center; justify-content:center; font-size:0.85em; }
+        .scene-btn:hover { transform:scale(1.15); }
+        .scene-btn.active { border-color:var(--accent); box-shadow:0 0 8px rgba(184,115,11,0.3); }
+        /* 【功能1】元素反应系统 */
+        .element-affix { display:inline-flex; gap:2px; margin-left:4px; }
+        .element-affix-icon { font-size:0.65em; padding:1px 3px; border-radius:4px; animation:elemPulse 1.5s infinite; }
+        @keyframes elemPulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+        .reaction-flash { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); font-size:2em; font-weight:900; z-index:9999; pointer-events:none; animation:reactionPop 1s ease-out forwards; }
+        @keyframes reactionPop { 0%{transform:translate(-50%,-50%) scale(0.3);opacity:0;} 30%{transform:translate(-50%,-50%) scale(1.3);opacity:1;} 70%{transform:translate(-50%,-50%) scale(1);opacity:1;} 100%{transform:translate(-50%,-50%) scale(1.5);opacity:0;} }
+        .monster-type-badge { font-size:0.58em; padding:1px 5px; border-radius:4px; font-weight:700; margin-left:2px; }
+        .monster-type-badge.tank { background:#e3f2fd; color:#1565c0; }
+        .monster-type-badge.assassin { background:#fce4ec; color:#c62828; }
+        .monster-type-badge.healer { background:#e8f5e9; color:#2e7d32; }
+        .element-core-slot { display:flex; align-items:center; gap:6px; padding:6px 10px; border:1px dashed var(--border); border-radius:8px; cursor:pointer; transition:all 0.2s; }
+        .element-core-slot:hover { border-color:var(--accent); }
+        .element-core-slot.active { border-style:solid; border-color:var(--accent); background:var(--accent-light); }
+        /* 【功能2】装备分解与强化 */
+        .equip-fragment-badge { font-size:0.65em; padding:2px 6px; border-radius:4px; font-weight:700; }
+        .equip-fragment-badge.green { background:#e8f5e9; color:#2e7d32; }
+        .equip-fragment-badge.blue { background:#e3f2fd; color:#1565c0; }
+        .equip-fragment-badge.purple { background:#f3e5f5; color:#7b1fa2; }
+        .quality-badge { font-size:0.55em; padding:1px 4px; border-radius:3px; font-weight:700; margin-left:3px; }
+        .quality-badge.white { background:#f5f5f5; color:#757575; }
+        .quality-badge.green { background:#e8f5e9; color:#2e7d32; }
+        .quality-badge.blue { background:#e3f2fd; color:#1565c0; }
+        .quality-badge.purple { background:#f3e5f5; color:#7b1fa2; }
+        /* 【功能3】热力图 */
+        .heatmap-container { overflow-x:auto; padding:4px 0; }
+        .heatmap-tooltip { position:absolute; background:#2c2416; color:#f5f0e8; padding:4px 8px; border-radius:6px; font-size:0.7em; pointer-events:none; z-index:100; white-space:nowrap; }
+        /* 【功能4】职业分支 */
+        .class-card { padding:14px; border:2px solid var(--border); border-radius:12px; cursor:pointer; transition:all 0.2s; text-align:center; }
+        .class-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+        .class-card.selected { border-color:var(--accent); background:var(--accent-light); box-shadow:0 2px 12px rgba(184,115,11,0.15); }
+        .class-icon { font-size:2.5em; margin-bottom:6px; }
+        .specialization-bar { height:6px; border-radius:3px; background:var(--border); overflow:hidden; margin-top:4px; }
+        .specialization-fill { height:100%; border-radius:3px; transition:width 0.3s; }
+        /* 【功能5】环境buff */
+        .env-buff-badge { display:inline-flex; align-items:center; gap:3px; font-size:0.65em; padding:2px 6px; border-radius:4px; background:var(--accent-light); color:var(--accent); margin-left:4px; }
         .toast {
             position: fixed;
             bottom: 28px;
@@ -1435,6 +1512,8 @@
         .ktn-stats span { background: var(--panel2); padding: 3px 8px; border-radius: 5px; }
         /* 英雄区知识进度徽章 */
         .kt-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--border); font-size: 0.66em; font-weight: 700; color: var(--text2); cursor: help; }
+        .rebirth-badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: 8px; background: linear-gradient(135deg, rgba(159,122,234,0.15), rgba(107,70,193,0.15)); border: 1px solid #9f7aea; font-size: 0.66em; font-weight: 700; color: #9f7aea; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+        .rebirth-badge:hover { transform: scale(1.08); box-shadow: 0 0 8px rgba(159,122,234,0.4); }
         /* ==================== 终身目标 · 命运主线 ==================== */
         .lg-create-box { max-width: 540px; margin: 0 auto; padding: 24px 18px; text-align: center; }
         .lg-create-box .lg-emoji { font-size: 3.4em; margin-bottom: 8px; }
@@ -2210,9 +2289,9 @@
     <div class="hero-strip" id="heroStrip">
         <div class="hero-avatar-wrap"><div class="hero-avatar" id="heroAvatar" onclick="showRadar()" style="cursor:pointer" title="点击查看属性雷达图">⚔️</div><div class="hero-lv-badge" id="heroLvBadge">Lv.1</div><div class="pet-follower" id="petFollower" onclick="openPetPanel()" title="点击查看宠物" style="display:none"></div></div>
         <div class="hero-info">
-            <div class="row"><span class="stat hp-val"><span class="ico">❤️</span> <span id="heroHp">30</span>/<span id="heroMaxHp">30</span></span><span class="stat gold-val"><span class="ico">🪙</span> <span id="heroGold">0</span></span><span class="stat"><span class="ico">✨</span> <span id="heroExp">0</span>/<span id="heroExpNeed">35</span></span><span class="hero-title" id="heroTitleBadge" onclick="openTitleSelector()" style="display:none">称号</span><span class="mbti-badge" id="heroMbtiBadge" onclick="reopenMbti()" style="display:none">🧬 MBTI</span><span class="kt-badge" id="heroKtBadge" style="display:none"><span>🌳</span><span>0/0</span></span><span class="buff-badge" id="expBuffBadge" style="display:none">双倍EXP</span></div>
+            <div class="row"><span class="stat hp-val"><span class="ico">❤️</span> <span id="heroHp">30</span>/<span id="heroMaxHp">30</span></span><span class="stat gold-val"><span class="ico">🪙</span> <span id="heroGold">0</span></span><span class="stat"><span class="ico">✨</span> <span id="heroExp">0</span>/<span id="heroExpNeed">35</span></span><span class="hero-title" id="heroTitleBadge" onclick="openTitleSelector()" style="display:none">称号</span><span class="mbti-badge" id="heroMbtiBadge" onclick="reopenMbti()" style="display:none">🧬 MBTI</span><span class="kt-badge" id="heroKtBadge" style="display:none"><span>🌳</span><span>0/0</span></span><span class="rebirth-badge" id="heroRebirthBadge" onclick="switchView('rebirth')" style="display:none;cursor:pointer" title="点击查看转生与天赋">🔄 0世</span><span class="buff-badge" id="expBuffBadge" style="display:none">双倍EXP</span><span class="env-buff-badge" id="envBuffBadge" style="display:none;cursor:pointer" onclick="openEnvBuffPanel()">🌍</span></div>
             <div class="bar-row"><div class="bar-item"><span class="bar-label">❤️</span><div class="bar-track"><div class="bar-fill hp-fill" id="hpBar" style="width:100%"></div></div><span class="bar-pct" id="hpPct">100%</span></div><div class="bar-item"><span class="bar-label">✨</span><div class="bar-track"><div class="bar-fill exp-fill" id="expBar" style="width:0%"></div></div><span class="bar-pct" id="expPct">0%</span></div><div class="bar-item mp-bar-item"><span class="bar-label">🔵</span><div class="bar-track"><div class="bar-fill" id="mpBar" style="width:100%"></div></div><span class="bar-pct" id="mpPct">100%</span></div></div>
-            <div class="hero-attrs"><span class="attr str">💪 <strong id="attrStr">1</strong></span><span class="attr int">🧠 <strong id="attrInt">1</strong></span><span class="attr con">🛡️ <strong id="attrCon">1</strong></span><span class="attr per">👁️ <strong id="attrPer">1</strong></span><button class="btn sm" onclick="openBackpack()" style="margin-left:4px">🎒 背包</button><button class="btn sm" onclick="openTitleSelector()">🏷 称号</button><button class="btn sm" onclick="openSkillAcademy()">🔮 技能</button><button class="btn sm" onclick="openEquipmentBag()">⚔️ 装备</button></div>
+            <div class="hero-attrs"><span class="attr str">💪 <strong id="attrStr">1</strong></span><span class="attr int">🧠 <strong id="attrInt">1</strong></span><span class="attr con">🛡️ <strong id="attrCon">1</strong></span><span class="attr per">👁️ <strong id="attrPer">1</strong></span><button class="btn sm" onclick="openBackpack()" style="margin-left:4px">🎒 背包</button><button class="btn sm" onclick="openTitleSelector()">🏷 称号</button><button class="btn sm" onclick="openSkillAcademy()">🔮 技能</button><button class="btn sm" onclick="openEquipmentBag()">⚔️ 装备</button><button class="btn sm accent" id="focusTimerBtn" onclick="openFocusTimer()" style="background:var(--exp);color:#fff">🧘 修炼</button><span class="scene-switcher" id="sceneSwitcher"><span class="scene-btn" data-scene="tavern" onclick="switchScene('tavern')" title="酒馆 · 商店9折">🍺</span><span class="scene-btn" data-scene="forest" onclick="switchScene('forest')" title="森林 · 修炼经验+5%">🌲</span><span class="scene-btn" data-scene="starry" onclick="switchScene('starry')" title="星空 · 轮回能量+10%">✨</span><span class="scene-btn" data-scene="academy" onclick="switchScene('academy')" title="魔法学院 · 知识碎片+1">🎓</span></span></div>
             <div class="hero-skills" id="heroSkills"></div>
             <div class="loop-energy-row" id="loopEnergyRow"><span class="le-label">🔄轮回</span><div class="loop-energy-track" id="loopEnergyTrack" onclick="tryWorldJump()" title="能量满后点击进行世界跳跃"><div class="loop-energy-fill" id="loopEnergyFill" style="width:0%"></div></div><span class="le-val" id="loopEnergyVal">0</span><span class="help-tip" data-tip="<strong>🔄 轮回能量</strong>完成任务、击败怪物积累能量。能量满后点击可进行「世界跳跃」，重置进度但获得永久加成。">?</span></div>
         </div>
@@ -2247,6 +2326,8 @@
             <div class="nav-section">⭐ 命运</div>
             <div class="nav-item" data-view="lifetime" onclick="switchView('lifetime')"><span class="icon">⭐</span><span>命运主线</span><span class="help-tip" data-tip="<strong>⭐ 命运主线</strong>输入一句人生愿景，自动生成 4 阶主线任务链 + 5 个支线任务。完成全部主线解锁"超越者"传奇技能。">?</span></div>
             <div class="nav-divider"></div>
+            <div class="nav-item" data-view="rebirth" onclick="switchView('rebirth')"><span class="icon">🔄</span><span>转生天赋</span><span class="help-tip" data-tip="<strong>🔄 转生天赋</strong>完成命运主线后可转生，重置等级但获得天赋点。在天赋树投资永久加成。">?</span></div>
+            <div class="nav-divider"></div>
             <div class="nav-item" onclick="openShop()"><span class="icon">🏪</span><span>商店</span></div>
             <div class="nav-item" onclick="openSkillAcademy()"><span class="icon">🔮</span><span>技能学院</span></div>
             <div class="nav-item" onclick="openEquipmentBag()"><span class="icon">⚔️</span><span>装备仓库</span></div>
@@ -2254,8 +2335,11 @@
         <div class="content"><div class="content-inner" id="contentInner"></div></div>
     </div>
     <!-- 弹窗 -->
-    <div class="modal-overlay" id="lifeGoalModal"><div class="modal"><h3 id="lgModalTitle">🎯 设定人生目标</h3><div class="field"><label>目标名称</label><input type="text" id="lgName" placeholder="如：5年内成为高级前端工程师"></div><div class="field-row"><div class="field"><label>目标类型</label><select id="lgType"><option value="career">💼 职业发展</option><option value="skill">🎓 技能学习</option><option value="health">💪 健康减脂</option><option value="finance">💰 财务规划</option><option value="creative">🎨 创意项目</option></select></div><div class="field"><label>时间跨度（月）</label><input type="number" id="lgMonths" value="12" min="1" max="60"></div></div><div class="field"><label>详细描述（可选）</label><textarea id="lgDesc" rows="2" placeholder="描述你的目标，系统将自动拆解为阶段性副本任务"></textarea></div><input type="hidden" id="lgEditId" value=""><div class="btn-group"><button class="btn" onclick="closeModal('lifeGoalModal')">取消</button><button class="btn accent" onclick="saveLifeGoal()">✨ 自动生成副本</button></div></div></div>
+    <div class="modal-overlay" id="lifeGoalModal"><div class="modal"><h3 id="lgModalTitle">🎯 设定人生目标</h3><div class="field"><label>⚡ 快速预设模板</label><select id="lgPreset" onchange="onLgPresetChange()"><option value="">请选择预设模板</option><option value="coder">💻 程序员晋升之路</option><option value="fitness">💪 健身达人计划</option><option value="finance">💰 财务自由路线</option></select></div><div class="lg-wizard-steps"><div class="lg-step-dot active" id="lgDot1">1</div><div class="lg-step-line" id="lgLine1"></div><div class="lg-step-dot" id="lgDot2">2</div><div class="lg-step-line" id="lgLine2"></div><div class="lg-step-dot" id="lgDot3">3</div></div><div class="lg-wizard-panel" id="lgStep1"><p class="lg-step-title">你希望改变哪个领域？</p><div class="lg-type-grid"><div class="lg-type-card" data-type="career" onclick="lgSelectType('career')"><span class="lg-type-icon">💼</span><span class="lg-type-label">职业发展</span></div><div class="lg-type-card" data-type="skill" onclick="lgSelectType('skill')"><span class="lg-type-icon">🎓</span><span class="lg-type-label">技能学习</span></div><div class="lg-type-card" data-type="health" onclick="lgSelectType('health')"><span class="lg-type-icon">💪</span><span class="lg-type-label">健康减脂</span></div><div class="lg-type-card" data-type="finance" onclick="lgSelectType('finance')"><span class="lg-type-icon">💰</span><span class="lg-type-label">财务规划</span></div><div class="lg-type-card" data-type="creative" onclick="lgSelectType('creative')"><span class="lg-type-icon">🎨</span><span class="lg-type-label">创意项目</span></div></div></div><div class="lg-wizard-panel" id="lgStep2" style="display:none"><p class="lg-step-title">你想在多长时间内达成？</p><div class="lg-months-slider"><input type="range" id="lgMonthsSlider" min="0" max="3" value="2" oninput="lgSliderChange()"><div class="lg-months-display" id="lgMonthsDisplay">12 个月</div></div></div><div class="lg-wizard-panel" id="lgStep3" style="display:none"><p class="lg-step-title">具体描述你的愿景</p><div class="field"><label>目标名称</label><input type="text" id="lgName" placeholder="如：5年内成为高级前端工程师"></div><div class="field"><label>详细描述（可选）</label><textarea id="lgDesc" rows="2" placeholder="描述你的目标，系统将自动拆解为阶段性副本任务"></textarea></div></div><input type="hidden" id="lgType" value="career"><input type="hidden" id="lgMonths" value="12"><input type="hidden" id="lgEditId" value=""><div class="btn-group"><button class="btn" id="lgPrevBtn" onclick="lgPrevStep()" style="display:none">← 上一步</button><button class="btn" onclick="closeModal('lifeGoalModal')">取消</button><button class="btn accent" id="lgNextBtn" onclick="lgNextStep()">下一步 →</button><button class="btn accent" id="lgFinishBtn" onclick="saveLifeGoal()" style="display:none">✨ 生成副本</button></div></div></div>
     <div class="modal-overlay" id="shopModal"><div class="modal"><h3>🏪 装备商店</h3><p style="font-size:0.78em;color:var(--text3);margin-bottom:10px">用金币购买装备和药水</p><div id="shopItems"></div><div id="goblinBannerSlot"></div><div class="btn-group"><button class="btn" onclick="closeModal('shopModal')">关闭</button></div></div></div>
+    <!-- 【功能一】专注计时器弹窗 -->
+    <div class="modal-overlay" id="focusTimerModal"><div class="modal"><h3>🧘 副本修炼 · 专注计时</h3><div id="focusTimerContent"></div><div class="btn-group"><button class="btn" onclick="closeModal('focusTimerModal')">关闭</button></div></div></div>
+    <div class="modal-overlay" id="envBuffModal"><div class="modal"><h3>🌍 现实世界联动</h3><div id="envBuffContent"></div><div class="btn-group"><button class="btn" onclick="closeModal('envBuffModal')">关闭</button></div></div></div>
     <!-- 宠物面板 -->
     <div class="modal-overlay" id="petModal"><div class="modal"><h3>🐾 宠物庄园</h3><div id="petPanelContent"></div><div class="btn-group"><button class="btn" onclick="closeModal('petModal')">关闭</button></div></div></div>
     <!-- 称号选择 -->
@@ -2345,6 +2429,33 @@
         const MONSTERS = ['🐺', '🐗', '🦇', '🐍', '🦎', '🦂', '🐊', '🦅', '🐻', '🦈', '🐉', '👹', '👾', '💀', '🐲', '🦑', '🐃', '🦏'];
         const BOSS_MONSTERS = ['🐉', '👹', '💀', '🐲', '🔥', '👑', '🦇', '⚡', '🌪️', '🕳️'];
 
+        // P2: 元素克制系统 — 火/冰/雷/水/暗 五元素循环克制
+        const ELEMENTS = {
+            fire:  { icon: '🔥', name: '火', strong: 'ice',   weak: 'water' },
+            ice:   { icon: '❄️', name: '冰', strong: 'thunder', weak: 'fire' },
+            thunder: { icon: '⚡', name: '雷', strong: 'water', weak: 'ice' },
+            water:  { icon: '💧', name: '水', strong: 'fire',  weak: 'thunder' },
+            dark:   { icon: '🌑', name: '暗', strong: 'none',  weak: 'none' },
+        };
+        const ELEMENT_KEYS = Object.keys(ELEMENTS);
+        // 元素克制倍率
+        const ELEMENT_COUNTER_MULT = 1.5;  // 克制时伤害 ×1.5
+        const ELEMENT_RESIST_MULT  = 0.7;  // 被克时伤害 ×0.7
+        // 为怪物随机分配元素（30%概率有元素）
+        function rollMonsterElement() {
+            if (Math.random() < 0.3) return ELEMENT_KEYS[Math.floor(Math.random() * ELEMENT_KEYS.length)];
+            return null;
+        }
+        // 计算元素克制倍率：atkEl 攻击 defEl 防御
+        function getElementMult(atkEl, defEl) {
+            if (!atkEl || !defEl) return 1.0;
+            const elDef = ELEMENTS[defEl];
+            if (!elDef) return 1.0;
+            if (elDef.weak === atkEl) return ELEMENT_COUNTER_MULT;  // 攻击方克制防御方
+            if (elDef.strong === atkEl) return ELEMENT_RESIST_MULT; // 攻击方被克制
+            return 1.0;
+        }
+
         // ==================== 证书技能模板（传奇技能库）====================
         // bonus 字段说明：questGold=副本金币倍率；dailyExp=每日经验倍率；goldDrop=任务额外掉落金币；travelSpeed=每日扣血减半
         const CERT_SKILL_TEMPLATES = {
@@ -2357,6 +2468,127 @@
             transcender: { id:'transcender', name:'超越者', icon:'🌟', desc:'终身目标达成 · 永久传奇', bonus:{ allReward:1.2 }, bonusText:'所有任务奖励 ×1.2（终极技能）' },
         };
         const CERT_BONUS_TEXT = { questGold:'副本金币', dailyExp:'每日经验', goldDrop:'金币掉落', travelSpeed:'扣血减半', allReward:'全任务奖励' };
+
+        // ==================== P3: 天赋树定义 ====================
+        // 每个天赋有 maxLevel（最大等级），每级效果叠加
+        const TALENT_TEMPLATES = {
+            // —— 力量分支 ——
+            critDmg:   { id:'critDmg',   name:'💥 致命一击',   icon:'💥', branch:'力量', maxLevel:5, desc:'暴击伤害 +10%/级', effect: (lv) => 0.1 * lv },
+            atkBoost:  { id:'atkBoost',  name:'⚔️ 蛮力',       icon:'⚔️', branch:'力量', maxLevel:5, desc:'基础攻击 +5%/级', effect: (lv) => 0.05 * lv },
+            // —— 智慧分支 ——
+            mpReduce:  { id:'mpReduce',  name:'🔵 节能施法',   icon:'🔵', branch:'智慧', maxLevel:3, desc:'技能 MP 消耗 -10%/级', effect: (lv) => 0.1 * lv },
+            expBoost:  { id:'expBoost',  name:'📚 领悟力',     icon:'📚', branch:'智慧', maxLevel:5, desc:'任务经验 +8%/级', effect: (lv) => 0.08 * lv },
+            // —— 体质分支 ——
+            maxHpBoost:{ id:'maxHpBoost',name:'❤️ 强健体魄',   icon:'❤️', branch:'体质', maxLevel:5, desc:'最大 HP +15/级', effect: (lv) => 15 * lv },
+            dmgReduce: { id:'dmgReduce', name:'🛡️ 铁壁',       icon:'🛡️', branch:'体质', maxLevel:3, desc:'受到伤害 -5%/级', effect: (lv) => 0.05 * lv },
+            // —— 感知分支 ——
+            goldBoost: { id:'goldBoost', name:'💰 财运亨通',   icon:'💰', branch:'感知', maxLevel:5, desc:'金币掉落 +10%/级', effect: (lv) => 0.1 * lv },
+            critRate:  { id:'critRate',  name:'🎯 锐眼',       icon:'🎯', branch:'感知', maxLevel:5, desc:'暴击率 +2%/级', effect: (lv) => 0.02 * lv },
+        };
+        const TALENT_BRANCHES = ['力量', '智慧', '体质', '感知'];
+
+        // P3: 获取天赋等级
+        function getTalentLevel(id) {
+            return (data.talents && data.talents[id]) || 0;
+        }
+        // P3: 获取天赋效果值
+        function getTalentEffect(id) {
+            const tpl = TALENT_TEMPLATES[id];
+            if (!tpl) return 0;
+            return tpl.effect(getTalentLevel(id));
+        }
+        // P3: 天赋加成汇总（供战斗系统调用）
+        function talentCritDmgMult() { return 1 + getTalentEffect('critDmg') + getClassBonus('critDmg'); }
+        function talentAtkMult()     { return 1 + getTalentEffect('atkBoost'); }
+        function talentMpReduceMult(){ return Math.max(0.3, 1 - getTalentEffect('mpReduce') - getClassBonus('mpReduce')); }
+        function talentExpMult()     { return 1 + getTalentEffect('expBoost') + getBranchSpecBonus('dailyExp'); }
+        function talentMaxHpBonus()  { return getTalentEffect('maxHpBoost'); }
+        function talentDmgReduceMult(){ return Math.max(0.5, 1 - getTalentEffect('dmgReduce') - getBranchSpecBonus('dmgReduce')); }
+        function talentGoldMult()    { return (1 + getTalentEffect('goldBoost') + getBranchSpecBonus('goldDrop')) * getEnvBuff('goldDrop'); }
+        function talentCritRateBonus(){ return getTalentEffect('critRate'); }
+
+        // P3: 转生 — 重置等级/装备，保留永久被动 + 获得天赋点
+        function canRebirth() {
+            // 条件：至少完成 1 个命运主线（终身目标）
+            const lifetimes = getLifetimeGoals();
+            const completed = lifetimes.filter(lg => lg.completed);
+            return completed.length > 0;
+        }
+        function performRebirth() {
+            if (!canRebirth()) { showToast('需要至少完成 1 个命运主线才能转生'); return; }
+            if (!confirm('转生将重置等级、装备和金币，但保留：\n• 知识之力（保留20%）\n• 天赋点（+1）\n• 转生次数加成（金币掉落+5%/次）\n\n确认转生？')) return;
+            // 计算保留的知识之力
+            const keptKnowledgePower = Math.floor(getKnowledgePower() * 0.2);
+            // 重置英雄
+            data.hero = { level: 1, hp: 30, maxHp: 30, mp: 20, maxMp: 20, exp: 0, gold: Math.floor(data.hero.gold * 0.1),
+                str: 1, int: 1, con: 1, per: 1, equipment: [], inventory: [], deathCount: 0, _expBonus: 0, mbti: data.hero.mbti };
+            // 重置装备和购买
+            data.purchased = [];
+            data.equipmentBag = [];
+            data.skills = [];
+            // 重置副本进度
+            data.quests = [];
+            data.lifeGoals = [];
+            data.todos = [];
+            data.habits = [];
+            data.dailies = [];
+            // 重置战斗状态
+            data.battleState = null;
+            data.difficultyMod = 1.0;
+            data.consecutiveClears = 0;
+            data.consecutiveDeaths = 0;
+            data.fateEnergy = 0;
+            // 重置命运主线
+            if (data.extendedModules) data.extendedModules.lifetimeGoals = [];
+            // 保留知识之力 20%（通过设置一个永久标记）
+            data._keptKnowledgePower = keptKnowledgePower;
+            // 增加转生次数 + 天赋点
+            data.rebirth.count = (data.rebirth.count || 0) + 1;
+            data.rebirth.talentPoints = (data.rebirth.talentPoints || 0) + 1;
+            data.rebirth.totalTalentPoints = (data.rebirth.totalTalentPoints || 0) + 1;
+            data.rebirth.rebirthPoints = (data.rebirth.rebirthPoints || 0) + 1; // 【功能2b】转生点数
+            // 保留宠物
+            // 保留成就/称号/证书技能/图鉴
+            // 保留故事日志（追加转生记录）
+            if (data.story) {
+                data.story.logs.push({ date: todayLocal(), text: `🔄 第${data.rebirth.count}次转生！保留知识之力${keptKnowledgePower}点，获得1天赋点`, type: 'rebirth' });
+            }
+            recalcHeroStats();
+            data.hero.hp = data.hero.maxHp;
+            data.hero.mp = data.hero.maxMp;
+            saveData();
+            render();
+            updateHeroPanel();
+            // 转生特效
+            screenFlash('victory-flash');
+            hapticFeedback([50, 30, 50, 30, 80]);
+            showFloatingMsg(`🔄 转生成功！第${data.rebirth.count}世`, 'lvup');
+            showToast(`🎉 转生成功！获得 1 天赋点，保留 ${keptKnowledgePower} 知识之力`);
+        }
+        // P3: 点亮天赋
+        function investTalent(id) {
+            const tpl = TALENT_TEMPLATES[id];
+            if (!tpl) return;
+            const cur = getTalentLevel(id);
+            if (cur >= getClassTalentMaxLevel(id)) { showToast('该天赋已满级'); return; }
+            if ((data.rebirth.talentPoints || 0) <= 0) { showToast('没有可用天赋点'); return; }
+            data.talents[id] = cur + 1;
+            data.rebirth.talentPoints--;
+            recalcHeroStats();
+            autoSave();
+            render();
+            updateHeroPanel();
+            showToast(`${tpl.icon} ${tpl.name} → Lv.${cur + 1}`);
+            hapticFeedback(20);
+        }
+        // P3: 转生金币加成
+        function rebirthGoldBonus() {
+            return 1 + (data.rebirth.count || 0) * 0.05;
+        }
+        // P3: 保留的知识之力加成
+        function keptKnowledgeAtkBonus() {
+            return data._keptKnowledgePower || 0;
+        }
 
         // ==================== MBTI 测评题库（16题，每题4选项）====================
         // 每个选项分配 E/I/S/N/T/F/J/P 维度分数
@@ -2774,11 +3006,98 @@
             tutorial: { done: false, step: 0 },
             // —— 通知设置 ——
             notif: { enabled: false, asked: false },
+            // —— P3: 转生与天赋系统 ——
+            rebirth: { count: 0, talentPoints: 0, totalTalentPoints: 0 },  // 转生次数、可用天赋点、累计获得
+            talents: {},  // 已点天赋 { talentId: level }
         };
 
         const STORAGE_KEY = 'rpg_quest_v4';
         const THEME_KEY = 'rpg_quest_theme';
         const PENALTY_KEY = 'rpg_quest_penalty';
+        // —— P0: 多版本自动备份系统 ——
+        const BACKUP_KEYS = ['rpg_quest_v4_bak1', 'rpg_quest_v4_bak2', 'rpg_quest_v4_bak3']; // 3个备份槽
+        const BACKUP_META_KEY = 'rpg_quest_v4_bak_meta'; // 备份元信息（时间戳列表）
+        const MAX_BACKUPS = 3;
+
+        // 数据模式校验：检查存档关键字段是否完整（防止部分写入导致数据损坏）
+        function validateDataSchema(obj) {
+            if (!obj || typeof obj !== 'object') return { valid: false, reason: '存档不是有效对象' };
+            if (!obj.hero || typeof obj.hero !== 'object') return { valid: false, reason: '缺少 hero 字段' };
+            if (typeof obj.hero.level !== 'number' || obj.hero.level < 1) return { valid: false, reason: 'hero.level 无效' };
+            if (typeof obj.hero.hp !== 'number' || obj.hero.hp < 0) return { valid: false, reason: 'hero.hp 无效' };
+            if (typeof obj.hero.maxHp !== 'number' || obj.hero.maxHp < 1) return { valid: false, reason: 'hero.maxHp 无效' };
+            if (!Array.isArray(obj.habits)) return { valid: false, reason: 'habits 不是数组' };
+            if (!Array.isArray(obj.dailies)) return { valid: false, reason: 'dailies 不是数组' };
+            if (!Array.isArray(obj.todos)) return { valid: false, reason: 'todos 不是数组' };
+            if (!Array.isArray(obj.quests)) return { valid: false, reason: 'quests 不是数组' };
+            if (typeof obj.nextId !== 'number') return { valid: false, reason: 'nextId 无效' };
+            return { valid: true };
+        }
+
+        // 创建备份：在每次保存前，将当前存档推入备份队列（FIFO 滚动）
+        function createBackup() {
+            try {
+                const current = localStorage.getItem(STORAGE_KEY);
+                if (!current) return; // 没有现存数据则跳过
+                // 读取备份元信息
+                let meta = [];
+                try { meta = JSON.parse(localStorage.getItem(BACKUP_META_KEY) || '[]'); } catch(e) { meta = []; }
+                // 滚动备份：bak3 丢弃，bak2→bak3，bak1→bak2，当前→bak1
+                for (let i = BACKUP_KEYS.length - 1; i > 0; i--) {
+                    const prev = localStorage.getItem(BACKUP_KEYS[i - 1]);
+                    if (prev) {
+                        localStorage.setItem(BACKUP_KEYS[i], prev);
+                        meta[i] = meta[i - 1] || null;
+                    }
+                }
+                localStorage.setItem(BACKUP_KEYS[0], current);
+                meta[0] = { time: Date.now(), level: (data.hero ? data.hero.level : '?') };
+                localStorage.setItem(BACKUP_META_KEY, JSON.stringify(meta));
+            } catch(e) {
+                console.warn('备份创建失败（不影响正常使用）:', e.message);
+            }
+        }
+
+        // 从备份恢复：按优先级依次尝试 bak1 → bak2 → bak3
+        function loadFromBackup() {
+            for (let i = 0; i < BACKUP_KEYS.length; i++) {
+                try {
+                    const raw = localStorage.getItem(BACKUP_KEYS[i]);
+                    if (!raw) continue;
+                    const parsed = JSON.parse(raw);
+                    const check = validateDataSchema(parsed);
+                    if (check.valid) {
+                        console.warn(`存档损坏，已从备份 #${i+1} 恢复。原因: ${check.reason}`);
+                        showToast(`⚠️ 存档异常，已自动从备份恢复（备份#${i+1}）`);
+                        return parsed;
+                    }
+                } catch(e) { continue; }
+            }
+            return null; // 所有备份都不可用
+        }
+
+        // 导出存档（支持密码加密）
+        async function exportSaveData(password) {
+            const raw = localStorage.getItem(STORAGE_KEY) || JSON.stringify(data);
+            if (password) {
+                // AES-GCM 加密
+                try {
+                    const enc = new TextEncoder();
+                    const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+                    const salt = crypto.getRandomValues(new Uint8Array(16));
+                    const key = await crypto.subtle.deriveKey(
+                        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+                        keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['encrypt']
+                    );
+                    const iv = crypto.getRandomValues(new Uint8Array(12));
+                    const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(raw));
+                    const combined = new Uint8Array(salt.length + iv.length + encrypted.byteLength);
+                    combined.set(salt, 0); combined.set(iv, salt.length); combined.set(new Uint8Array(encrypted), salt.length + iv.length);
+                    return 'ENC:' + btoa(String.fromCharCode(...combined));
+                } catch(e) { console.error('加密失败，回退明文:', e); }
+            }
+            return raw; // 明文
+        }
 
         // 本地日期助手：返回本地时区的 YYYY-MM-DD（避免 toISOString 的 UTC 偏移导致凌晨日期错位）
         function dateLocal(d) {
@@ -2803,6 +3122,88 @@
         // 命运能量：副本通关积累，满后推进命运主线（与轮回能量并存：命运能量=推进主线，轮回能量=转生重置）
         const FATE_ENERGY_CAP = 100;
         const FATE_ENERGY_PER_QUEST = 20;
+
+        // ==================== P1: 轻量状态管理层（Action Dispatcher）====================
+        // 设计理念：不强制重构所有直接赋值，而是提供一个可选的 dispatch 入口
+        // 用于调试追踪、操作日志、时间旅行（撤销/重做）
+        const actionHistory = [];       // 操作历史 [{type, payload, time, snapshot}]
+        const MAX_ACTION_HISTORY = 30;  // 最多保留 30 条操作记录
+        let debugPanelVisible = false;
+
+        // 派发操作：记录操作日志 + 执行 reducer + 触发渲染
+        function dispatch(action) {
+            if (!action || !action.type) { console.warn('dispatch: action.type 必填'); return; }
+            // 记录操作历史
+            const entry = {
+                type: action.type,
+                payload: action.payload || null,
+                time: new Date().toLocaleTimeString('zh-CN', { hour12: false }),
+                heroLevel: data.hero ? data.hero.level : '?',
+                heroHp: data.hero ? data.hero.hp : '?',
+            };
+            actionHistory.push(entry);
+            if (actionHistory.length > MAX_ACTION_HISTORY) actionHistory.shift();
+            // 执行 reducer（如果已注册）
+            const reducer = reducers[action.type];
+            if (reducer) {
+                reducer(action.payload);
+            }
+            // 控制台日志（开发调试用）
+            if (debugPanelVisible) {
+                console.log(`[Action] ${action.type}`, action.payload || '');
+            }
+        }
+
+        // Reducer 注册表：各模块注册自己的状态修改逻辑
+        const reducers = {};
+
+        // 注册 reducer
+        function registerReducer(actionType, fn) {
+            reducers[actionType] = fn;
+        }
+
+        // 已注册的核心 reducers
+        registerReducer('ATTACK', (p) => { /* attackMonster 已有逻辑，此处仅做日志 */ });
+        registerReducer('HEAL', (p) => { if (p && p.amount) data.hero.hp = Math.min(data.hero.maxHp, data.hero.hp + p.amount); });
+        registerReducer('GAIN_EXP', (p) => { if (p && p.amount) { data.hero.exp += p.amount; checkLevelUp(); } });
+        registerReducer('GAIN_GOLD', (p) => { if (p && p.amount) data.hero.gold += p.amount; });
+
+        // P1: 调试面板 — 显示操作历史 + 数据快照
+        function toggleDebugPanel() {
+            debugPanelVisible = !debugPanelVisible;
+            let panel = document.getElementById('debugPanel');
+            if (!debugPanelVisible) {
+                if (panel) panel.remove();
+                return;
+            }
+            if (!panel) {
+                panel = document.createElement('div');
+                panel.id = 'debugPanel';
+                panel.style.cssText = 'position:fixed;top:50px;right:10px;width:320px;max-height:60vh;overflow-y:auto;background:#1a1a2e;color:#0f0;border:1px solid #333;border-radius:8px;padding:10px;font-family:monospace;font-size:11px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.4)';
+                document.body.appendChild(panel);
+            }
+            updateDebugPanel();
+        }
+
+        function updateDebugPanel() {
+            const panel = document.getElementById('debugPanel');
+            if (!panel) return;
+            const recent = actionHistory.slice(-15).reverse();
+            let html = '<div style="color:#ff0;font-weight:bold;margin-bottom:6px;">🎮 Debug Panel (Ctrl+`)</div>';
+            html += `<div style="color:#888;margin-bottom:6px;">Hero: Lv.${data.hero.level} HP:${data.hero.hp}/${data.hero.maxHp} EXP:${data.hero.exp}/${getExpNeeded()} Gold:${data.hero.gold}</div>`;
+            html += '<div style="border-top:1px solid #333;padding-top:6px;">';
+            if (recent.length === 0) {
+                html += '<div style="color:#666;">No actions yet</div>';
+            } else {
+                recent.forEach(a => {
+                    html += `<div style="margin-bottom:2px;color:#0f0;">[${a.time}] <span style="color:#ff0;">${a.type}</span> <span style="color:#888;">${a.payload ? JSON.stringify(a.payload).slice(0, 50) : ''}</span></div>`;
+                });
+            }
+            html += '</div>';
+            html += `<div style="border-top:1px solid #333;padding-top:6px;margin-top:6px;color:#888;">Data keys: ${Object.keys(data).length} | Quests: ${data.quests.length} | Todos: ${data.todos.length}</div>`;
+            panel.innerHTML = html;
+            if (debugPanelVisible) setTimeout(updateDebugPanel, 500);
+        }
 
         // ==================== 社交副本系统：NPC 模板 ====================
         const NPC_TEMPLATES = [
@@ -2839,7 +3240,31 @@
             try {
                 const raw = localStorage.getItem(STORAGE_KEY);
                 if (raw) {
-                    data = JSON.parse(raw);
+                    // P0: 数据完整性校验 — 解析后先验证模式，损坏则尝试从备份恢复
+                    let parsed;
+                    try {
+                        parsed = JSON.parse(raw);
+                    } catch(parseErr) {
+                        console.error('存档 JSON 解析失败，尝试从备份恢复...', parseErr);
+                        const recovered = loadFromBackup();
+                        if (recovered) { parsed = recovered; }
+                        else { parsed = null; showToast('⚠️ 存档损坏且无可用备份，已重置为新游戏'); }
+                    }
+                    if (parsed) {
+                        const schemaCheck = validateDataSchema(parsed);
+                        if (!schemaCheck.valid) {
+                            console.warn('存档模式校验失败:', schemaCheck.reason, '— 尝试从备份恢复');
+                            const recovered = loadFromBackup();
+                            if (recovered) { parsed = recovered; }
+                            else { showToast('⚠️ 存档损坏且无可用备份，已重置为新游戏'); parsed = null; }
+                        }
+                    }
+                    if (!parsed) {
+                        // 彻底无法恢复，保留已初始化的默认 data 对象（不覆盖）
+                        console.warn('所有存档和备份均不可用，使用默认新游戏数据');
+                    } else {
+                        data = parsed;
+                    }
                     if (!data.lifeGoals) data.lifeGoals = [];
                     if (!data.quests) data.quests = [];
                     if (!data.habits) data.habits = [];
@@ -2856,7 +3281,7 @@
                     data.habits.forEach(h => { if (h.streak === undefined) h.streak = 0; });
                     data.quests.forEach(q => { if (!q.monsters) q.monsters = []; if (q.monsters) q.monsters.forEach(
                             m => { if (m.defeated === undefined) m.defeated = false; if (!m.maxHp) m.maxHp = m
-                                .hp; }); });
+                                .hp; if (m.element === undefined) m.element = null; }); }); // P2: 元素属性迁移
                     // —— 新系统字段迁移（兼容旧存档）——
                     migrateField('pet', null);
                     migrateField('petInventory', []);
@@ -2943,14 +3368,39 @@
                     if (!data.equipmentBag) data.equipmentBag = [];
                     if (!data.tutorial) data.tutorial = { done: false, step: 0 };
                     if (!data.notif) data.notif = { enabled: false, asked: false };
+                    // P3: 转生与天赋系统迁移
+                    if (!data.rebirth) data.rebirth = { count: 0, talentPoints: 0, totalTalentPoints: 0 };
+                    if (data.rebirth.count === undefined) data.rebirth.count = 0;
+                    if (data.rebirth.talentPoints === undefined) data.rebirth.talentPoints = 0;
+                    if (data.rebirth.totalTalentPoints === undefined) data.rebirth.totalTalentPoints = 0;
+                    if (!data.talents) data.talents = {};
+                    if (data._keptKnowledgePower === undefined) data._keptKnowledgePower = 0;
                     // —— 命运能量迁移（副本通关积累，满后推进命运主线）——
                     if (data.fateEnergy === undefined) data.fateEnergy = 0;
+                    // 【功能一~五】新字段迁移
+                    if (data.sceneTheme === undefined) data.sceneTheme = 'tavern';
+                    if (!data.friends) data.friends = [];
+                    if (!data.friendCode) data.friendCode = '';
+                    if (data.pet) {
+                        if (!data.pet.accessories) data.pet.accessories = [];
+                        if (!data.pet.dailyQuest) data.pet.dailyQuest = null;
+                        if (data.pet.lastQuestDate === undefined) data.pet.lastQuestDate = '';
+                    }
                     // —— 难度自适应 & 周回顾迁移 ——
                     if (data.difficultyMod === undefined) data.difficultyMod = 1.0;
                     if (data.consecutiveClears === undefined) data.consecutiveClears = 0;
                     if (data.consecutiveDeaths === undefined) data.consecutiveDeaths = 0;
                     if (data.lastWeeklyReview === undefined) data.lastWeeklyReview = '';
                     if (data.stats && data.stats.todayActions && data.stats.todayActions.questsCleared === undefined) data.stats.todayActions.questsCleared = 0;
+                    // 【新功能】元素反应/装备碎片/职业/环境 数据迁移
+                    if (!data.elementCore) data.elementCore = null;
+                    if (!data.equipFragments) data.equipFragments = { green:0, blue:0, purple:0 };
+                    if (!data.rebirthShop) data.rebirthShop = { skillShards:0, petSkins:[] };
+                    if (data.rebirth && data.rebirth.heroClass === undefined) data.rebirth.heroClass = null;
+                    if (data.rebirth && data.rebirth.rebirthPoints === undefined) data.rebirth.rebirthPoints = 0;
+                    if (!data.envBuff) data.envBuff = { location:null, weather:null, lastUpdate:0, manualScene:null };
+                    // 为现有副本怪物补充 monsterType 和 elementAffix 字段
+                    data.quests.forEach(function(q) { if (q.monsters) q.monsters.forEach(function(m) { if (!m.monsterType) m.monsterType = null; if (!m.elementAffix) m.elementAffix = null; if (!m.frozen) m.frozen = false; }); });
                     // —— 社交副本系统迁移 ——
                     if (!data.npcs) data.npcs = initNpcs();
                     else data.npcs.forEach(npc => {
@@ -3038,8 +3488,26 @@
 
         function genId() { return 'id_' + (data.nextId++); }
 
+        // P0: 备份节流 — 每 60 秒最多创建一次备份，避免高频 autosave 时频繁写 localStorage
+        let lastBackupTime = 0;
+        const BACKUP_INTERVAL_MS = 60000;
+
         function saveData() {
             try {
+                // P0: stats.log 增量限制 — 只保留最近 50 条历史日志，防止 localStorage 膨胀
+                if (data.stats && data.stats.log && data.stats.log.length > 50) {
+                    data.stats.log = data.stats.log.slice(-50);
+                }
+                // P0: story.logs 限制 — 只保留最近 100 条轮回日志
+                if (data.story && data.story.logs && data.story.logs.length > 100) {
+                    data.story.logs = data.story.logs.slice(-100);
+                }
+                // P0: 保存前创建滚动备份（节流：距上次备份 >60s 才执行）
+                const now = Date.now();
+                if (now - lastBackupTime > BACKUP_INTERVAL_MS) {
+                    createBackup();
+                    lastBackupTime = now;
+                }
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
                 document.getElementById('saveDot').style.background = 'var(--success)';
                 document.getElementById('saveLabel').textContent = '已保存';
@@ -3204,6 +3672,7 @@
                 // 重置今日行为计数
                 data.stats.todayActions = { date: today, habits:0, dailies:0, todos:0, attacks:0, monsters:0, gold:0, exp:0, questsCleared:0 };
                 generateDailyChallenge();
+                tryGenerateDailyNarrative(); // 【功能三】每日首次打开时生成叙事日志
             }
         }
 
@@ -3219,7 +3688,7 @@
                 uncompleted.forEach(d => { totalDmg += (DIFFICULTY_CONFIG[d.difficulty] || DIFFICULTY_CONFIG['medium'])
                         .dmg;
                     d.streak = Math.max(0, (d.streak || 0) - 1); });
-                totalDmg = Math.max(1, Math.round(totalDmg * (1 - data.hero.con * 0.04) * (1 - petDefendRatio()) * (1 - npcDefendRatio()) * certDailyDmgMultiplier() * mbtiDailyDmgMult())); // 玄龟减伤 + 驾驶精通减半 + ISTJ人格减半
+                totalDmg = Math.max(1, Math.round(totalDmg * (1 - data.hero.con * 0.04) * (1 - petDefendRatio()) * (1 - npcDefendRatio()) * certDailyDmgMultiplier() * mbtiDailyDmgMult() * talentDmgReduceMult())); // 玄龟减伤 + 驾驶精通减半 + ISTJ人格减半 + P3天赋铁壁
                 data.hero.hp = Math.max(0, data.hero.hp - totalDmg);
                 showFloatingMsg(`💔 -${totalDmg} HP`, 'dmg');
                 if (data.hero.hp <= 0) triggerDeath();
@@ -3297,7 +3766,8 @@
             data.hero.int = i;
             data.hero.con = c;
             data.hero.per = p;
-            data.hero.maxHp = 30 + (data.hero.level - 1) * 8 + c * 3 + bhp;
+            // P3: 天赋加成 — 最大HP + 强健体魄天赋
+            data.hero.maxHp = 30 + (data.hero.level - 1) * 8 + c * 3 + bhp + talentMaxHpBonus();
             data.hero.maxMp = 20 + (data.hero.level - 1) * 3 + Math.floor(i * 1.5);
             data.hero._expBonus = eb;
             if (data.hero.hp > data.hero.maxHp) data.hero.hp = data.hero.maxHp;
@@ -3306,7 +3776,8 @@
             if (data.hero.mp > data.hero.maxMp) data.hero.mp = data.hero.maxMp;
         }
 
-        function getExpNeeded() { return data.hero.level * 35; }
+        // P2: 经验需求曲线增长 — 35 * (等级^1.2)，防止后期等级膨胀
+        function getExpNeeded() { return Math.floor(35 * Math.pow(data.hero.level, 1.2)); }
 
         // ==================== 证书技能增益计算（函数封装）====================
         function certHasSkill(id) {
@@ -3422,13 +3893,20 @@
                             .length - 1 ? 'hard' : mi >= stage.monsters.length - 2 ? 'medium' :
                             'easy';
                         const cfg = DIFFICULTY_CONFIG[diff];
-                        const mhp = Math.round((diff === 'hard' ? 40 : diff === 'medium' ? 25 : 12) * (data.difficultyMod || 1.0));
+                        var mhp = Math.round((diff === 'hard' ? 40 : diff === 'medium' ? 25 : 12) * (data.difficultyMod || 1.0));
+                        var mType = rollMonsterType(); // 【功能1b】提前生成类型用于HP调整
+                        if (mType === 'tank') mhp = Math.round(mhp * 2.0); // 坦克双倍血量
+                        else if (mType === 'assassin') mhp = Math.round(mhp * 0.6); // 刺客低血量
                         const todoId = genId();
                         data.todos.push({ id: todoId, name: mName, difficulty: diff, due: '', done: false,
                             questId, lifeGoalId: lgId });
                         return { id: 'mon_' + genId(), name: mName, hp: mhp, maxHp: mhp, difficulty: diff,
                             todoId, defeated: false, isBoss: (idx === template.stages.length - 1 &&
-                                mi === stage.monsters.length - 1) };
+                                mi === stage.monsters.length - 1),
+                            element: rollMonsterElement(), // P2: 随机分配元素属性
+                            monsterType: mType, // 【功能1b】使用预生成的怪物兵种
+                            elementAffix: null, // 【功能1】元素附着状态
+                            frozen: false }; // 【功能1】冻结状态
                     });
                     data.quests.push({
                         id: questId,
@@ -3539,8 +4017,9 @@
                 todo.done = true;
                 const cfg = DIFFICULTY_CONFIG[todo.difficulty] || DIFFICULTY_CONFIG['medium'];
                 const expMult = (data.activeBuffs.expPotionUntil > Date.now()) ? 2 : 1; // 双倍经验药水
-                const expGain = Math.round(applyMbtiBonus('questExp', applyCertBonus('questExp', cfg.exp * 1.5 * quest.rewardMultiplier)) * (1 + (data.hero._expBonus || 0) + npcExpBonus()) * expMult);
-                let goldGain = Math.round(applyMbtiBonus('questGold', applyCertBonus('questGold', cfg.gold * 1.5 * quest.rewardMultiplier)) * (1 + npcGoldBonus())) + petGoldBonus() + certGoldDropBonus();
+                // P3: 天赋经验加成 + 转生金币加成
+                const expGain = Math.round(applyMbtiBonus('questExp', applyCertBonus('questExp', cfg.exp * 1.5 * quest.rewardMultiplier)) * (1 + (data.hero._expBonus || 0) + npcExpBonus()) * expMult * talentExpMult());
+                let goldGain = Math.round(applyMbtiBonus('questGold', applyCertBonus('questGold', cfg.gold * 1.5 * quest.rewardMultiplier)) * (1 + npcGoldBonus()) * talentGoldMult() * rebirthGoldBonus()) + petGoldBonus() + certGoldDropBonus();
                 if ((data.activeBuffs.goldDropBonus || 0) > 0) { // 金币掉落增益
                     goldGain += (data.activeBuffs._goldBonusAmt || 10);
                     data.activeBuffs.goldDropBonus--;
@@ -3651,17 +4130,33 @@
             }
             if (!data.battleState.log) data.battleState.log = [];
             const bs = data.battleState;
-            // 攻击计算（含宠物暴击加成、必暴击buff、MBTI暴击加成）
-            const baseAtk = data.hero.str + Math.floor(data.hero.level * 0.5);
-            let critChance = data.hero.per * 0.04 + petCritBonus() + mbtiCritBonus() + npcCritBonus();
+            // P2: 攻击计算 — 边际递减公式（str*0.8 + 等级^0.6*2），防止后期数值碾压
+            const baseAtk = Math.floor(data.hero.str * 0.8) + Math.floor(Math.pow(data.hero.level, 0.6) * 2);
+            // P3: 天赋暴击率加成
+            let critChance = data.hero.per * 0.04 + petCritBonus() + mbtiCritBonus() + npcCritBonus() + talentCritRateBonus();
             let atk = baseAtk + Math.floor(Math.random() * 6);
+            // P3: 天赋攻击力加成
+            atk = Math.floor(atk * talentAtkMult());
             let isCrit = false;
             if (data.activeBuffs.guaranteedCrit) { isCrit = true; data.activeBuffs.guaranteedCrit = false; }
             else isCrit = Math.random() < critChance;
-            if (isCrit) atk = Math.floor(atk * 2.2);
+            // P3: 天赋暴击伤害加成（基础2.2x + 天赋每级+0.1x）
+            if (isCrit) atk = Math.floor(atk * 2.2 * talentCritDmgMult());
             atk = Math.max(1, atk);
             atk += petOnAttack(); // 宠物助攻额外伤害
             atk += knowledgeAtkBonus(); // 知识之力：攻击加成
+            atk += keptKnowledgeAtkBonus(); // P3: 转生保留的知识之力
+            atk = Math.floor(atk * getEnvBuff('atk')); // 【功能5】健身房环境攻击力加成
+            // P2: 元素克制伤害计算 — 英雄无元素时取1.0，怪物有元素则计算克制
+            const heroEl = data.hero._element || null;
+            const monsterElementType = monster.element || null;
+            const elMult = getElementMult(heroEl, monsterElementType);
+            if (elMult !== 1.0) {
+                atk = Math.floor(atk * elMult);
+                const elLabel = elMult > 1 ? '克制' : '抵抗';
+                const elIcon = elMult > 1 ? '💥' : '🛡️';
+                addBattleLog(`${elIcon} 元素${elLabel}！伤害${elMult > 1 ? '×' + elMult : '×' + elMult}`, elMult > 1 ? 'crit' : 'dodge');
+            }
             // 连击伤害加成
             const comboMult = getComboMult();
             if (comboMult > 1) atk = Math.floor(atk * comboMult);
@@ -3672,10 +4167,12 @@
                 heroSprite.classList.add('attacking');
                 setTimeout(() => { heroSprite.classList.remove('attacking'); heroSprite.classList.add('idle'); }, 450);
             }
-            // 多阶段 BOSS：P2 闪避、P3 狂暴
+            // 多阶段 BOSS：P2 闪避（动态闪避率：20% + 玩家等级*0.5%，上限35%）、P3 狂暴
             const bossPhase = getBossPhase(monster);
             let dodged = false;
-            if (monster.isBoss && bossPhase === 2 && Math.random() < 0.25) {
+            // P2: 动态闪避率 — 基础20% + 玩家等级*0.5%（封顶35%），让后期依然有挑战
+            const bossDodgeRate = Math.min(0.35, 0.20 + data.hero.level * 0.005);
+            if (monster.isBoss && bossPhase === 2 && Math.random() < bossDodgeRate && !monster.frozen) {
                 dodged = true;
                 showDamageAtElement('monster-' + monsterId, '💨 闪避!', 'dodge');
                 const dodgeEl = document.getElementById('monster-' + monsterId);
@@ -3686,6 +4183,25 @@
             if (!dodged) {
                 monster.hp = Math.max(0, monster.hp - atk);
                 addBattleLog(`${isCrit?'💥 暴击！':'⚔️'} 你对 ${monster.name} 造成 ${atk} 点伤害${isCrit?'（暴击）':''}`, isCrit?'crit':'attack');
+                // 【功能1】元素附着与反应检测
+                var heroElement = data.elementCore || data.hero._element || null;
+                if (heroElement) {
+                    var reaction = applyElementAffix(monster, heroElement);
+                    if (reaction) {
+                        executeElementReaction(reaction, quest, monster, heroElement);
+                    } else {
+                        addBattleLog(ELEMENTS[heroElement].icon + ' 附着' + ELEMENTS[heroElement].name + '元素', 'attack');
+                    }
+                }
+                // 【功能4】力量分支专精：吸血
+                var lifesteal = getBranchSpecBonus('lifesteal');
+                if (lifesteal > 0 && atk > 0) {
+                    var heal = Math.floor(atk * lifesteal);
+                    if (heal > 0 && data.hero.hp < data.hero.maxHp) {
+                        data.hero.hp = Math.min(data.hero.maxHp, data.hero.hp + heal);
+                        showDamageAtElement('heroBattleSprite', '🩸+' + heal, 'heal');
+                    }
+                }
                 // NPC 协攻：好感度≥30有概率追加伤害
                 const assist = npcAssistDamage();
                 if (assist.dmg > 0) {
@@ -3696,7 +4212,7 @@
                 }
                 // P3 狂暴：反弹 30% 伤害
                 if (monster.isBoss && bossPhase === 3 && monster.hp > 0) {
-                    let reflect = Math.max(1, Math.floor(atk * 0.3) - knowledgeDefBonus());
+                    let reflect = Math.max(1, Math.floor(atk * 0.3 * talentDmgReduceMult()) - knowledgeDefBonus()); // P3: 天赋铁壁减伤
                     // 冥想副作用：怪物本回合攻击+30%（影响反弹伤害）
                     if (data.activeBuffs.monsterAttackBoost) reflect = Math.floor(reflect * 1.3);
                     if (data.activeBuffs.shieldNext) { reflect = Math.floor(reflect * 0.2); data.activeBuffs.shieldNext = false; showDamageAtElement('heroBattleSprite', '🛡️ 圣盾!', 'shield'); addBattleLog(`🛡️ 圣盾抵挡了大部分反弹伤害`, 'shield'); }
@@ -3756,7 +4272,7 @@
                 if (data.activeBuffs.monsterAttackBoost) {
                     const cfg = DIFFICULTY_CONFIG[monster.difficulty] || DIFFICULTY_CONFIG['medium'];
                     let counterDmg = Math.max(1, Math.round(cfg.dmg * 1.3));
-                    counterDmg = Math.max(1, Math.round(counterDmg * (1 - data.hero.con * 0.03)) - knowledgeDefBonus());
+                    counterDmg = Math.max(1, Math.round(counterDmg * (1 - data.hero.con * 0.03) * talentDmgReduceMult()) - knowledgeDefBonus()); // P3: 天赋铁壁减伤
                     if (data.activeBuffs.shieldNext) { counterDmg = Math.floor(counterDmg * 0.2); data.activeBuffs.shieldNext = false; showDamageAtElement('heroBattleSprite', '🛡️ 圣盾!', 'shield'); addBattleLog(`🛡️ 圣盾抵挡了反扑`, 'shield'); }
                     data.hero.hp = Math.max(0, data.hero.hp - counterDmg);
                     showDamageAtElement('heroBattleSprite', `-${counterDmg}`, 'reflect');
@@ -3766,11 +4282,17 @@
                     if (data.hero.hp <= 0) { addBattleLog(`💀 英雄阵亡...`, 'death'); screenFlash('death-flash'); triggerDeath(); autoSave(); render(); return; }
                 }
             }
+            // 【功能1b】怪物兵种行为：每回合结束时执行
+            if (monster.hp > 0 && !monster.defeated) {
+                processMonsterTypes(quest);
+            }
+            // 【功能1】清除冻结状态（持续到下次攻击结束）
+            if (monster.frozen) monster.frozen = false;
             autoSave();
             updateHeroPanel();
-            // 延迟渲染让动画播放，战斗中保持战斗场景
+            // P0: 延迟渲染让动画播放，战斗中保持战斗场景（使用 requestRender 合并高频渲染）
             setTimeout(() => {
-                if (quest.completed) { render(); }
+                if (quest.completed) { requestRender(); }
                 else { enterBattle(questId); }
             }, 350);
         }
@@ -3786,6 +4308,7 @@
                 data.hero.mp = data.hero.maxMp; // 升级回满 MP
                 showFloatingMsg(`🎉 Lv.${data.hero.level}!`, 'lvup');
                 showLvupBurst(data.hero.level);
+                hapticFeedback([30, 20, 30]); // P2: 升级震动反馈
                 showToast(`🎉 恭喜升级！当前等级 ${data.hero.level} · MP 已回满`);
             }
             // 社交系统：升级时检查NPC解锁
@@ -3820,8 +4343,13 @@
             const today = todayLocal();
             const ta = data.stats.todayActions;
             if (!ta || ta.date !== today) {
-                data.stats.todayActions = { date: today, habits:0, dailies:0, todos:0, attacks:0, monsters:0, gold:0, exp:0 };
+                data.stats.todayActions = { date: today, habits:0, dailies:0, todos:0, attacks:0, monsters:0, gold:0, exp:0, timestamps:[] };
             }
+            if (!data.stats.todayActions.timestamps) data.stats.todayActions.timestamps = []; // 【功能3】兼容旧数据
+        }
+        function recordTaskTimestamp() { // 【功能3】记录任务完成时间戳用于时段分析
+            if (!data.stats.todayActions.timestamps) data.stats.todayActions.timestamps = [];
+            data.stats.todayActions.timestamps.push(Date.now());
         }
 
         function triggerHabit(id, dir) {
@@ -3847,11 +4375,13 @@
                 updateChallengeProgress('habitPlus', 1);
                 updateSocialQuestProgress('habit', 1);
                 if (Math.random() < 0.25) addKnowledgeFragments(1, 'habit');
+                checkPetDailyQuest(); // 【功能二】检测宠物每日任务完成
+                recordTaskTimestamp(); // 【功能3】记录完成时间戳
                 checkLevelUp();
                 checkAchievements();
                 autoSave();
                 render(); } else if (dir === 'minus' && (h.type === 'negative' || h.type === 'both')) { h.streak = Math
-                    .max(0, (h.streak || 0) - 1); const dmg = Math.max(1, Math.round(cfg.dmg * (1 - data.hero.con * 0.03)));
+                    .max(0, (h.streak || 0) - 1); const dmg = Math.max(1, Math.round(cfg.dmg * (1 - data.hero.con * 0.03) * talentDmgReduceMult())); // P3: 天赋铁壁减伤
                 data.hero.hp = Math.max(0, data.hero.hp - dmg);
                 showFloatingMsg(`💔 -${dmg} HP`, 'dmg'); if (data.hero.hp <= 0) triggerDeath();
                 autoSave();
@@ -3880,6 +4410,8 @@
             if (Math.random() < 0.20) addKnowledgeFragments(1, 'daily');
             // 命运主线：每日子任务连续完成7天后自动标记完成
             checkLifetimeMainQuestCompletion(id);
+            checkPetDailyQuest(); // 【功能二】检测宠物每日任务完成
+            recordTaskTimestamp(); // 【功能3】记录完成时间戳
             checkLevelUp();
             checkAchievements();
             autoSave();
@@ -3910,6 +4442,8 @@
             // 命运主线：检查主线子任务和支线任务完成情况
             checkLifetimeMainQuestCompletion(id);
             checkSideQuestCompletion(id);
+            checkPetDailyQuest(); // 【功能二】检测宠物每日任务完成
+            recordTaskTimestamp(); // 【功能3】记录完成时间戳
             checkLevelUp();
             checkAchievements();
             autoSave();
@@ -3952,9 +4486,8 @@
             document.getElementById('shopModal').classList.add('visible');
         }
 
-        function buyItem(id) { const item = data.shop.find(s => s.id === id); if (!item) return; if (data.hero.gold < item
-                .cost) { showToast('💰 金币不足！'); return; }
-            data.hero.gold -= item.cost;
+        function buyItem(id) { const item = data.shop.find(s => s.id === id); if (!item) return; const finalCost = Math.ceil(item.cost * getSceneBonus('shopDiscount')); if (data.hero.gold < finalCost) { showToast('💰 金币不足！'); return; }
+            data.hero.gold -= finalCost;
             if (item.category === 'item' && item.itemId) {
                 // 道具进入背包计数
                 data.backpack[item.itemId] = (data.backpack[item.itemId]||0) + 1;
@@ -3988,7 +4521,876 @@
             render();
             showToast(`使用了 ${item.name}`); }
 
+        // ==================== 【功能一】专注计时器 · 副本修炼 ====================
+        let focusTimer = null;
+        let focusState = { active:false, paused:false, duration:25, elapsed:0, startTime:0, accumulatedExp:0, accumulatedGold:0, lastSettle:0 };
+
+        function openFocusTimer() {
+            document.getElementById('focusTimerModal').classList.add('visible');
+            renderFocusTimer();
+        }
+
+        function renderFocusTimer() {
+            const el = document.getElementById('focusTimerContent');
+            if (!el) return;
+            if (focusState.active) {
+                const remaining = Math.max(0, focusState.duration * 60 - focusState.elapsed);
+                const min = Math.floor(remaining / 60), sec = remaining % 60;
+                const pct = focusState.elapsed / (focusState.duration * 60);
+                const circumference = 2 * Math.PI * 70;
+                const offset = circumference * (1 - pct);
+                const activeQuest = data.quests.find(q => !q.completed);
+                el.innerHTML = '<div class="focus-timer-ring"><svg width="160" height="160"><circle class="ring-bg" cx="80" cy="80" r="70"/><circle class="ring-fg" cx="80" cy="80" r="70" stroke-dasharray="'+circumference+'" stroke-dashoffset="'+offset+'"/></svg><div class="focus-timer-center"><div class="time">'+String(min).padStart(2,'0')+':'+String(sec).padStart(2,'0')+'</div><div class="label">'+(focusState.paused?'⏸ 已暂停':'🧘 专注中')+'</div></div></div><div class="focus-stat-row"><div class="focus-stat"><div class="val" style="color:var(--exp)">+'+focusState.accumulatedExp+'</div><div class="lbl">专注经验</div></div><div class="focus-stat"><div class="val" style="color:var(--gold)">+'+focusState.accumulatedGold+'</div><div class="lbl">专注金币</div></div><div class="focus-stat"><div class="val" style="color:var(--success)">'+(activeQuest?'⚔️ '+activeQuest.stageName:'无副本')+'</div><div class="lbl">当前副本</div></div></div><div class="btn-group"><button class="btn" onclick="togglePauseFocus()">'+(focusState.paused?'▶ 继续':'⏸ 暂停')+'</button><button class="btn" onclick="cancelFocus()">✖ 取消（领取部分奖励）</button></div>';
+            } else {
+                el.innerHTML = '<p style="text-align:center;font-size:0.82em;color:var(--text3);margin-bottom:10px">每5分钟结算一次专注奖励，结束时对副本怪物造成伤害</p><div class="field"><label>专注时长（分钟）</label><select id="focusDurationSelect"><option value="15">15 分钟</option><option value="25" selected>25 分钟（番茄钟）</option><option value="45">45 分钟</option><option value="60">60 分钟</option></select></div><div style="text-align:center;font-size:0.72em;color:var(--text3);margin:8px 0">💡 森林场景经验+5% · 结束伤害=专注分钟×攻击力×0.3<br>奖励同时增加轮回能量和命运能量</div><div class="btn-group"><button class="btn accent" onclick="startFocus()">🧘 开始专注</button></div>';
+            }
+        }
+
+        function startFocus() {
+            const dur = parseInt(document.getElementById('focusDurationSelect').value) || 25;
+            focusState = { active:true, paused:false, duration:dur, elapsed:0, startTime:Date.now(), accumulatedExp:0, accumulatedGold:0, lastSettle:0 };
+            focusTimer = setInterval(tickFocus, 1000);
+            renderFocusTimer();
+            showToast('🧘 专注开始！'+dur+'分钟修炼之旅');
+            localStorage.setItem('focusState', JSON.stringify(focusState));
+        }
+
+        function tickFocus() {
+            if (focusState.paused) return;
+            focusState.elapsed++;
+            if (focusState.elapsed >= focusState.duration * 60) { finishFocus(); return; }
+            if (focusState.elapsed - focusState.lastSettle >= 300) { focusState.lastSettle = focusState.elapsed; settleFocusReward(); }
+            renderFocusTimer();
+        }
+
+        function settleFocusReward() {
+            const expBonus = getSceneBonus('focusExp') * getEnvBuff('focusExp'); // 【功能5】场景+环境修炼经验加成
+            const exp = Math.round(8 * expBonus);
+            const gold = Math.round(3);
+            focusState.accumulatedExp += exp;
+            focusState.accumulatedGold += gold;
+            data.hero.exp += exp;
+            data.hero.gold += gold;
+            if (data.story) data.story.loopEnergy = Math.min(100, (data.story.loopEnergy||0) + 1);
+            data.fateEnergy = Math.min(FATE_ENERGY_CAP || 100, (data.fateEnergy||0) + 1);
+            showFloatingMsg('✨ 专注之力：+'+exp+'EXP +'+gold+'🪙', 'exp');
+            checkLevelUp();
+            updateHeroPanel();
+            autoSave();
+        }
+
+        function finishFocus() {
+            clearInterval(focusTimer); focusTimer = null;
+            settleFocusReward();
+            const atk = getHeroAttack();
+            const dmg = Math.round(focusState.duration * atk * 0.3);
+            const activeQuest = data.quests.find(q => !q.completed);
+            if (activeQuest && activeQuest.monsters) {
+                let hitCount = 0;
+                activeQuest.monsters.forEach(function(m) { if (!m.defeated && m.hp > 0) { m.hp -= dmg; if (m.hp <= 0) { m.defeated = true; hitCount++; } } });
+                showToast('⚔️ 专注修炼结束！对副本怪物造成 '+dmg+' 伤害'+(hitCount>0?'，击败 '+hitCount+' 只':''));
+                if (activeQuest.monsters.every(function(m){return m.defeated})) completeQuest(activeQuest.id);
+            } else { showToast('🧘 专注修炼完成！获得 '+focusState.accumulatedExp+' 经验 + '+focusState.accumulatedGold+' 金币'); }
+            focusState.active = false;
+            localStorage.removeItem('focusState');
+            hapticFeedback([30, 20, 50]);
+            screenFlash('victory-flash');
+            autoSave(); render(); renderFocusTimer();
+        }
+
+        function togglePauseFocus() { focusState.paused = !focusState.paused; renderFocusTimer(); }
+        function cancelFocus() {
+            clearInterval(focusTimer); focusTimer = null;
+            if (focusState.accumulatedExp > 0) showToast('专注已取消，获得 '+focusState.accumulatedExp+' 经验 + '+focusState.accumulatedGold+' 金币');
+            focusState.active = false; localStorage.removeItem('focusState'); autoSave(); renderFocusTimer();
+        }
+
+        function restoreFocusState() {
+            const saved = localStorage.getItem('focusState');
+            if (!saved) return;
+            try {
+                const s = JSON.parse(saved);
+                if (s.active) {
+                    const elapsedSinceSave = Math.floor((Date.now() - s.startTime) / 1000);
+                    focusState = { active:true, paused:false, duration:s.duration, elapsed:Math.min(s.duration*60, elapsedSinceSave), startTime:s.startTime, accumulatedExp:s.accumulatedExp||0, accumulatedGold:s.accumulatedGold||0, lastSettle:s.lastSettle||0 };
+                    if (focusState.elapsed >= focusState.duration * 60) finishFocus();
+                    else { focusTimer = setInterval(tickFocus, 1000); showToast('🧘 专注计时已恢复'); }
+                }
+            } catch(e) { localStorage.removeItem('focusState'); }
+        }
+
+        // ==================== 【功能二】宠物深度互动 ====================
+        const PET_DIALOGUES = {
+            high: ['今天也是元气满满的一天！和你一起冒险真开心~','主人好厉害！我觉得跟着你一定能成为传说中的英雄！','嘿嘿，今天的我可是超级有干劲的哦！','要不要摸摸我的头？我心情好可以让你摸三下！','感觉我们越来越强了呢！下次副本一定通关！','我刚刚做了一个美梦，梦见我们一起打败了巨龙！','最喜欢和你一起完成待办事项了，超有成就感！'],
+            mid: ['嗯...感觉还行吧，今天也要加油哦。','主人，别忘了完成今天的每日任务呀。','我在旁边看着你呢，要认真专注哦。','有点无聊...要不我们去打副本？','今天的天气不错，适合出门冒险！','记得喂我吃东西哦，我会变强的！','我在等你呢，快点完成待办事项吧~'],
+            low: ['呜...感觉没什么精神，主人能陪陪我吗？','今天主人好像很忙...我会乖乖等你的。','有点想吃东西了...饿饿...','主人，你是不是忘记我了？我心情好低落...','好无聊啊...什么时候带我去冒险呢...','呜呜，感觉被冷落了...给我点关注嘛。'],
+        };
+        const PET_ACCESSORIES = [
+            { id:'hat', name:'🎩 礼帽', icon:'🎩', cost:30, desc:'优雅的绅士礼帽' },
+            { id:'scarf', name:'🧣 围巾', icon:'🧣', cost:20, desc:'温暖舒适的围巾' },
+            { id:'glasses', name:'👓 眼镜', icon:'👓', cost:25, desc:'智慧学者眼镜' },
+            { id:'crown', name:'👑 皇冠', icon:'👑', cost:80, desc:'王者风范皇冠' },
+            { id:'flower', name:'🌸 花环', icon:'🌸', cost:15, desc:'清新花环装饰' },
+        ];
+
+        function getPetDialogue() {
+            if (!data.pet) return '还没有宠物伙伴呢，去孵一个吧！';
+            const mood = data.pet.mood || 60;
+            const pool = mood >= 70 ? PET_DIALOGUES.high : mood >= 40 ? PET_DIALOGUES.mid : PET_DIALOGUES.low;
+            return pool[Math.floor(Math.random() * pool.length)];
+        }
+
+        function generatePetDailyQuest() {
+            if (!data.pet) return null;
+            const today = todayLocal();
+            if (data.pet.lastQuestDate === today) return data.pet.dailyQuest || null;
+            const questTypes = [
+                { type:'habits', text:'完成 2 个习惯打卡', target:2, check:function(){return data.habits.filter(function(h){return h.lastDone===todayLocal()}).length} },
+                { type:'dailies', text:'完成 3 个每日任务', target:3, check:function(){return data.dailies.filter(function(d){return d.completedToday}).length} },
+                { type:'todos', text:'完成 2 个待办事项', target:2, check:function(){return data.todos.filter(function(t){return t.done}).length} },
+            ];
+            const q = questTypes[Math.floor(Math.random() * questTypes.length)];
+            data.pet.dailyQuest = { type:q.type, text:q.text, target:q.target, check:q.check, completed:false };
+            data.pet.lastQuestDate = today;
+            return data.pet.dailyQuest;
+        }
+
+        function checkPetDailyQuest() {
+            if (!data.pet || !data.pet.dailyQuest || data.pet.dailyQuest.completed) return;
+            var q = data.pet.dailyQuest;
+            if (q.check() >= q.target && !q.completed) {
+                q.completed = true;
+                data.pet.exp = (data.pet.exp||0) + 10;
+                data.pet.mood = Math.min(100, (data.pet.mood||60) + 5);
+                showToast('🐾 '+data.pet.name+'的宠物任务完成！经验+10 心情+5');
+                checkPetLevelUp();
+                autoSave();
+            }
+        }
+
+        function checkPetLevelUp() {
+            if (!data.pet) return;
+            while (data.pet.exp >= petExpNeeded(data.pet.level)) {
+                data.pet.exp -= petExpNeeded(data.pet.level);
+                data.pet.level++;
+                showToast('🎉 '+data.pet.name+' 升级到 Lv.'+data.pet.level+'！');
+            }
+        }
+
+        function buyPetAccessory(id) {
+            var acc = PET_ACCESSORIES.find(function(a){return a.id===id});
+            if (!acc) return;
+            if (!data.pet) { showToast('需要先有宠物'); return; }
+            if (!data.pet.accessories) data.pet.accessories = [];
+            if (data.pet.accessories.includes(id)) { showToast('已拥有此配饰'); return; }
+            if (data.hero.gold < acc.cost) { showToast('🪙 金币不足'); return; }
+            data.hero.gold -= acc.cost;
+            data.pet.accessories.push(id);
+            showToast('🎁 购买了 '+acc.icon+' '+acc.name+'！');
+            autoSave(); updateHeroPanel(); renderPetPanelContent();
+        }
+
+        function renderPetPanelContent() {
+            var el = document.getElementById('petPanelContent');
+            if (!el) return;
+            var dialogue = getPetDialogue();
+            var quest = generatePetDailyQuest();
+            var ownedAcc = (data.pet && data.pet.accessories) || [];
+            var availableAcc = PET_ACCESSORIES.filter(function(a){return !ownedAcc.includes(a.id)});
+            var html = '';
+            if (data.pet) {
+                var tpl = PET_TYPES[data.pet.type];
+                var accIcons = ownedAcc.map(function(id){var a=PET_ACCESSORIES.find(function(x){return x.id===id});return a?a.icon:''}).join('');
+                html += '<div style="text-align:center;margin-bottom:10px"><div style="font-size:3em">'+tpl.icon+accIcons+'</div><div style="font-size:0.85em;font-weight:700;margin-top:4px">'+data.pet.name+' Lv.'+data.pet.level+'</div></div>';
+                html += '<div class="card" style="margin-bottom:10px;padding:10px 14px;background:var(--accent-light);border-radius:10px;"><div style="font-size:0.78em;color:var(--text2);line-height:1.5">💬 '+dialogue+'</div></div>';
+                if (quest) {
+                    var progress = quest.check();
+                    html += '<div class="card" style="margin-bottom:10px;padding:10px 14px;"><div style="font-size:0.72em;color:var(--text3);margin-bottom:4px">📋 今日宠物任务</div><div style="font-size:0.82em;font-weight:600">'+quest.text+'</div><div style="margin-top:4px"><div class="bar-track" style="height:6px"><div class="bar-fill" style="width:'+Math.min(100,progress/quest.target*100)+'%;background:var(--exp)"></div></div><span style="font-size:0.66em;color:var(--text3)">'+Math.min(progress,quest.target)+'/'+quest.target+(quest.completed?' ✅ 已完成':'')+'</span></div></div>';
+                }
+                html += '<div class="card" style="padding:10px 14px;"><div style="font-size:0.72em;color:var(--text3);margin-bottom:8px">🛍 宠物配饰商店</div>';
+                if (availableAcc.length === 0) html += '<div style="font-size:0.72em;color:var(--text3)">已拥有全部配饰！</div>';
+                else availableAcc.forEach(function(a){ html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:1.4em">'+a.icon+'</span><div style="flex:1"><div style="font-size:0.78em;font-weight:600">'+a.name+'</div><div style="font-size:0.66em;color:var(--text3)">'+a.desc+'</div></div><button class="btn sm accent" onclick="buyPetAccessory(\''+a.id+'\')">'+a.cost+'🪙</button></div>'; });
+                html += '</div>';
+            } else {
+                html += '<div class="empty-state"><div class="icon">🥚</div><p>还没有宠物</p><p style="font-size:0.72em;color:var(--text3)">通关副本有概率获得宠物蛋</p></div>';
+            }
+            el.innerHTML = html;
+        }
+
+        // 【功能二】openPetPanel — 新版含台词/任务/装扮
+        function openPetPanel() {
+            document.getElementById('petModal').classList.add('visible');
+            renderPetPanelContent();
+        }
+
+        // ==================== 【功能三】每日叙事日志 ====================
+        var NARRATIVE_TEMPLATES = [
+            '你{adv}完成了 {habits} 个习惯，{adv2}完成了 {dailies} 个每日任务。今天你击杀了 {monsters} 只怪物，{petLine}一切都在向好的方向发展。',
+            '这一天，你{adv}推进了 {todos} 个待办事项，通过了 {quests} 个副本。{petLine}你的剑刃依然锋利，意志依然坚定。',
+            '轮回日记：你以{adv}的姿态完成了今日的修炼——{habits}个习惯、{dailies}个每日、{todos}个待办。{petLine}明日继续前行！',
+            '今日的你{adv}而充实：击杀 {monsters} 只怪物，通关 {quests} 个副本。{petLine}冒险的脚步永不停歇。',
+            '你{adv2}地完成了今天的挑战。{habits}个习惯打卡，{monsters}只怪物倒下。{petLine}这就是自律勇者的日常。',
+        ];
+        var NARRATIVE_ADJECTIVES = ['稳健地','英勇地','疲惫但满足地','毫不犹豫地','从容不迫地','全力以赴地'];
+        var NARRATIVE_ADJECTIVES2 = ['坚定','勇敢','专注','沉稳','果敢'];
+
+        function generateDailyNarrative() {
+            var ta = data.stats && data.stats.todayActions ? data.stats.todayActions : { habits:0, dailies:0, todos:0, monsters:0, questsCleared:0 };
+            var habits = ta.habits||0, dailies = ta.dailies||0, todos = ta.todos||0, monsters = ta.monsters||0, quests = ta.questsCleared||0;
+            var petLine = data.pet ? (PET_TYPES[data.pet.type]?PET_TYPES[data.pet.type].icon:'🐾')+data.pet.name+'一直陪伴着你，' : '';
+            var tpl = NARRATIVE_TEMPLATES[Math.floor(Math.random()*NARRATIVE_TEMPLATES.length)];
+            var adv = NARRATIVE_ADJECTIVES[Math.floor(Math.random()*NARRATIVE_ADJECTIVES.length)];
+            var adv2 = NARRATIVE_ADJECTIVES2[Math.floor(Math.random()*NARRATIVE_ADJECTIVES2.length)];
+            return tpl.replace('{adv}',adv).replace('{adv2}',adv2).replace('{habits}',habits).replace('{dailies}',dailies).replace('{todos}',todos).replace('{monsters}',monsters).replace('{quests}',quests).replace('{petLine}',petLine);
+        }
+
+        function tryGenerateDailyNarrative() {
+            if (!data.story) data.story = { logs:[], loopEnergy:0, loopJumps:0, worldsUnlocked:[], lastDiaryDate:'' };
+            var today = todayLocal();
+            if (data.story.lastDiaryDate === today) return;
+            data.story.lastDiaryDate = today;
+            var text = generateDailyNarrative();
+            data.story.logs.push({ date:today, text:text, type:'narrative' });
+            if (data.story.logs.length > 100) data.story.logs = data.story.logs.slice(-100);
+        }
+
+        // ==================== 【功能四】轻量社交 · 好友代码与排行榜 ====================
+        function getFriendCode() {
+            if (data.friendCode) return data.friendCode;
+            var raw = (data.hero.name || 'Hero') + Date.now();
+            data.friendCode = btoa(raw).replace(/=/g,'').substring(0,8).toUpperCase();
+            autoSave();
+            return data.friendCode;
+        }
+
+        function getWeeklyScore() {
+            var log = (data.stats && data.stats.log) || [];
+            var weekAgo = new Date(Date.now() - 7*24*60*60*1000);
+            var score = 0;
+            log.forEach(function(e){ if (e.date && new Date(e.date) >= weekAgo) score += (e.habits||0)*1 + (e.dailies||0)*2 + (e.todos||0)*3 + (e.questsCleared||0)*5; });
+            return score;
+        }
+
+        function renderSocialFriends() {
+            var myCode = getFriendCode();
+            var myScore = getWeeklyScore();
+            var percentile = Math.min(99, Math.max(10, Math.round(myScore/10)+20));
+            var friends = data.friends || [];
+            var html = '<div class="card" style="margin-top:12px;padding:14px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.3em">👫</span><strong style="font-size:0.88em">好友 & 排行</strong></div>';
+            html += '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px"><div style="flex:1;min-width:120px"><div style="font-size:0.66em;color:var(--text3)">我的邀请码</div><div style="font-size:1.1em;font-weight:800;color:var(--accent);cursor:pointer" onclick="navigator.clipboard.writeText(\''+myCode+'\').then(function(){showToast(\'邀请码已复制\')})">'+myCode+' 📋</div></div><div style="flex:1;min-width:120px"><div style="font-size:0.66em;color:var(--text3)">本周自律积分</div><div style="font-size:1.1em;font-weight:800;color:var(--exp)">'+myScore+'</div></div><div style="flex:1;min-width:120px"><div style="font-size:0.66em;color:var(--text3)">虚拟排名</div><div style="font-size:1.1em;font-weight:800;color:var(--success)">超过 '+percentile+'% 勇者</div></div></div>';
+            html += '<div class="field" style="margin-bottom:8px"><label>输入好友邀请码</label><div style="display:flex;gap:6px"><input type="text" id="friendCodeInput" placeholder="8位邀请码" maxlength="8" style="flex:1;text-transform:uppercase"><button class="btn sm accent" onclick="addFriend()">添加</button></div></div>';
+            html += '<div id="friendList">'+(friends.length===0?'<div style="font-size:0.72em;color:var(--text3);text-align:center;padding:8px">还没有好友，分享你的邀请码吧！</div>':friends.map(function(f){return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:1.2em">🎮</span><div style="flex:1"><div style="font-size:0.78em;font-weight:600">'+f.name+'</div><div style="font-size:0.66em;color:var(--text3)">Lv.'+f.level+' · '+f.achPoints+'🏆 · '+f.score+'分</div></div></div>';}).join(''))+'</div></div>';
+            return html;
+        }
+
+        function addFriend() {
+            var code = document.getElementById('friendCodeInput').value.trim().toUpperCase();
+            if (!code || code.length !== 8) { showToast('请输入8位邀请码'); return; }
+            if (!data.friends) data.friends = [];
+            if (data.friends.find(function(f){return f.code===code})) { showToast('该好友已添加'); return; }
+            var friend = { code:code, name:'勇者'+code.substring(0,3), level:Math.max(1,data.hero.level-Math.floor(Math.random()*5)+2), achPoints:Math.max(0,getAchievementPoints()-Math.floor(Math.random()*20)), score:Math.max(0,getWeeklyScore()-Math.floor(Math.random()*30)) };
+            data.friends.push(friend);
+            autoSave();
+            showToast('🎉 已添加好友 '+friend.name);
+            render();
+        }
+
+        // ==================== 【功能五】UI 场景主题切换 ====================
+        var SCENE_THEMES = {
+            tavern:  { name:'酒馆', icon:'🍺', vars:{'--bg':'#f5ebe0','--panel':'#fff8f0','--accent':'#c8821e','--border':'#e8d5c0'}, buff:'商店9折', desc:'暖色调，温馨冒险者酒馆' },
+            forest:  { name:'森林', icon:'🌲', vars:{'--bg':'#e8f5e9','--panel':'#f1f8f3','--accent':'#2d7a3e','--border':'#c8e6c9'}, buff:'修炼经验+5%', desc:'清新绿意，自然森林' },
+            starry:  { name:'星空', icon:'✨', vars:{'--bg':'#1a1a2e','--panel':'#16213e','--accent':'#7c4dff','--border':'#2a2a4a','--text':'#e0e0e0','--text2':'#a0a0b0','--text3':'#606070'}, buff:'轮回能量+10%', desc:'深邃星空，神秘宇宙' },
+            academy: { name:'魔法学院', icon:'🎓', vars:{'--bg':'#f3e5f5','--panel':'#faf0fd','--accent':'#7b1fa2','--border':'#e1bee7'}, buff:'知识碎片+1', desc:'紫色魔法，学院氛围' },
+        };
+
+        function switchScene(scene) {
+            var theme = SCENE_THEMES[scene];
+            if (!theme) return;
+            data.sceneTheme = scene;
+            Object.keys(theme.vars).forEach(function(k){ document.documentElement.style.setProperty(k, theme.vars[k]); });
+            document.querySelectorAll('.scene-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.scene === scene); });
+            showToast(theme.icon+' 切换到「'+theme.name+'」· '+theme.buff);
+            autoSave();
+        }
+
+        function restoreScene() {
+            if (data.sceneTheme && SCENE_THEMES[data.sceneTheme]) switchScene(data.sceneTheme);
+            else { var btn = document.querySelector('.scene-btn[data-scene="tavern"]'); if (btn) btn.classList.add('active'); }
+        }
+
+        function getSceneBonus(type) {
+            var scene = data.sceneTheme;
+            if (scene === 'tavern') return type === 'shopDiscount' ? 0.9 : 1;
+            if (scene === 'forest') return type === 'focusExp' ? 1.05 : 1;
+            if (scene === 'starry') return type === 'loopEnergy' ? 1.1 : 1;
+            if (scene === 'academy') return type === 'knowledgeFrag' ? 2 : 1; // 知识碎片+1（乘以2）
+            return 1;
+        }
+
+        // ==================== 【功能1】策略化战斗 · 元素反应与怪物兵种 ====================
+        // 元素反应定义
+        var ELEMENT_REACTIONS = {
+            'fire+thunder': { name:'爆炸', icon:'💥', desc:'范围伤害（对其他存活怪物造成50%伤害）', color:'#ff6f00' },
+            'thunder+fire': { name:'爆炸', icon:'💥', desc:'范围伤害', color:'#ff6f00' },
+            'water+ice':    { name:'冻结', icon:'🧊', desc:'怪物下回合无法闪避', color:'#42a5f5' },
+            'ice+water':    { name:'冻结', icon:'🧊', desc:'怪物下回合无法闪避', color:'#42a5f5' },
+            'fire+water':   { name:'蒸汽', icon:'💨', desc:'回复英雄5%最大HP', color:'#26a69a' },
+            'water+fire':   { name:'蒸汽', icon:'💨', desc:'回复英雄5%最大HP', color:'#26a69a' },
+        };
+        // 怪物兵种定义
+        var MONSTER_TYPES = {
+            tank:     { name:'坦克', icon:'🛡️', hpMult:2.0, desc:'高血量，吸引火力' },
+            assassin: { name:'刺客', icon:'🗡️', hpMult:0.6, desc:'低血量，每回合反扑英雄' },
+            healer:   { name:'治疗者', icon:'💚', hpMult:1.0, desc:'每回合为其他怪物回血' },
+        };
+        function rollMonsterType() {
+            var r = Math.random();
+            if (r < 0.18) return 'tank';
+            if (r < 0.33) return 'assassin';
+            if (r < 0.45) return 'healer';
+            return null;
+        }
+        // 元素附着：攻击后给怪物附加元素状态
+        function applyElementAffix(monster, element) {
+            if (!element || !ELEMENTS[element]) return null;
+            var prevAffix = monster.elementAffix;
+            monster.elementAffix = element;
+            // 检查元素反应
+            if (prevAffix && prevAffix !== element) {
+                var key = prevAffix + '+' + element;
+                var reaction = ELEMENT_REACTIONS[key];
+                if (reaction) {
+                    monster.elementAffix = null; // 反应后清除附着
+                    return { reaction:reaction, prevElement:prevAffix, newElement:element };
+                }
+            }
+            return null;
+        }
+        // 执行元素反应效果
+        function executeElementReaction(reaction, quest, targetMonster, heroEl) {
+            var r = reaction.reaction;
+            showReactionFlash(r.icon + ' ' + r.name, r.color);
+            if (r.name === '爆炸') {
+                // 对其他存活怪物造成50%伤害
+                var dmg = Math.floor(getHeroAttack() * 0.5);
+                quest.monsters.forEach(function(m) {
+                    if (!m.defeated && m.hp > 0 && m.id !== targetMonster.id) {
+                        m.hp = Math.max(0, m.hp - dmg);
+                        showDamageAtElement('monster-' + m.id, '💥' + dmg, 'crit');
+                        spawnParticlesAtElement('monster-' + m.id, { count:12, colors:['#ff6f00','#ff9800','#fff'], speed:5, size:5, shape:'shard' });
+                        addBattleLog('💥 爆炸连锁·' + m.name + ' -' + dmg, 'crit');
+                    }
+                });
+            } else if (r.name === '冻结') {
+                targetMonster.frozen = true;
+                addBattleLog('🧊 ' + targetMonster.name + ' 被冻结！下回合无法闪避', 'dodge');
+            } else if (r.name === '蒸汽') {
+                var heal = Math.floor(data.hero.maxHp * 0.05);
+                data.hero.hp = Math.min(data.hero.maxHp, data.hero.hp + heal);
+                showDamageAtElement('heroBattleSprite', '💚+' + heal, 'heal');
+                addBattleLog('💨 蒸汽治愈·回复 ' + heal + ' HP', 'heal');
+            }
+        }
+        function showReactionFlash(text, color) {
+            var el = document.createElement('div');
+            el.className = 'reaction-flash';
+            el.textContent = text;
+            el.style.color = color;
+            el.style.textShadow = '0 0 20px ' + color;
+            document.body.appendChild(el);
+            setTimeout(function() { el.remove(); }, 1000);
+        }
+        // 元素核心装备：切换普攻属性
+        var ELEMENT_CORES = [
+            { id:'fire', name:'火之核心', icon:'🔥', desc:'普攻附带火元素' },
+            { id:'ice', name:'冰之核心', icon:'❄️', desc:'普攻附带冰元素' },
+            { id:'thunder', name:'雷之核心', icon:'⚡', desc:'普攻附带雷元素' },
+            { id:'water', name:'水之核心', icon:'💧', desc:'普攻附带水元素' },
+        ];
+        function setElementCore(el) {
+            if (data.elementCore === el) { data.elementCore = null; showToast('已卸下元素核心'); }
+            else { data.elementCore = el; showToast(ELEMENTS[el].icon + ' 装备了' + ELEMENTS[el].name + '之核心'); }
+            data.hero._element = data.elementCore;
+            autoSave(); recalcHeroStats(); updateHeroPanel();
+        }
+        // 怪物兵种行为：每回合结束时执行
+        function processMonsterTypes(quest) {
+            var aliveMonsters = quest.monsters.filter(function(m) { return !m.defeated && m.hp > 0; });
+            aliveMonsters.forEach(function(m) {
+                if (m.monsterType === 'healer') {
+                    // 治疗者：为其他存活怪物回血
+                    var heal = Math.floor(m.maxHp * 0.05);
+                    quest.monsters.forEach(function(other) {
+                        if (!other.defeated && other.hp > 0 && other.id !== m.id && other.hp < other.maxHp) {
+                            other.hp = Math.min(other.maxHp, other.hp + heal);
+                            showDamageAtElement('monster-' + other.id, '💚+' + heal, 'heal');
+                        }
+                    });
+                    if (heal > 0) addBattleLog('💚 ' + m.name + ' 为同伴治疗 +' + heal + ' HP', 'heal');
+                } else if (m.monsterType === 'assassin') {
+                    // 刺客：反扑英雄
+                    var cfg = DIFFICULTY_CONFIG[m.difficulty] || DIFFICULTY_CONFIG['medium'];
+                    var dmg = Math.max(1, Math.round(cfg.dmg * 0.6 * (1 - data.hero.con * 0.03) * talentDmgReduceMult()) - knowledgeDefBonus());
+                    if (data.activeBuffs && data.activeBuffs.shieldNext) { dmg = Math.floor(dmg * 0.2); data.activeBuffs.shieldNext = false; showDamageAtElement('heroBattleSprite', '🛡️ 圣盾!', 'shield'); }
+                    data.hero.hp = Math.max(0, data.hero.hp - dmg);
+                    showDamageAtElement('heroBattleSprite', '🗡️-' + dmg, 'reflect');
+                    addBattleLog('🗡️ ' + m.name + ' 突袭·-' + dmg + ' HP', 'reflect');
+                    var heroSprite = document.getElementById('heroBattleSprite');
+                    if (heroSprite) { heroSprite.classList.add('hurt'); setTimeout(function() { heroSprite.classList.remove('hurt'); }, 400); }
+                    if (data.hero.hp <= 0) { addBattleLog('💀 英雄阵亡...', 'death'); screenFlash('death-flash'); triggerDeath(); }
+                }
+            });
+        }
+
+        // ==================== 【功能2】经济闭环 · 装备分解与碎片强化 ====================
+        var EQUIP_QUALITY_ORDER = ['white','green','blue','purple'];
+        var EQUIP_QUALITY_NAMES = { white:'普通', green:'优秀', blue:'精良', purple:'史诗' };
+        var EQUIP_QUALITY_MULT = { white:1.0, green:1.3, blue:1.69, purple:2.2 };
+        function getEquipQuality(eq) { return eq.quality || 'white'; }
+        function decomposeEquipment(eqId) {
+            var eq = data.equipmentBag.find(function(e) { return e.id === eqId; });
+            if (!eq) return;
+            if (data.purchased.includes(eqId)) { showToast('请先卸下装备再分解'); return; }
+            var quality = getEquipQuality(eq);
+            var fragGain = { green:0, blue:0, purple:0 };
+            if (quality === 'purple') { fragGain.purple = 1; fragGain.blue = 2; }
+            else if (quality === 'blue') { fragGain.blue = 1; fragGain.green = 2; }
+            else if (quality === 'green') { fragGain.green = 2; }
+            else { fragGain.green = 1; }
+            // 强化等级额外碎片
+            if (eq.level > 0) fragGain.green += Math.floor(eq.level / 2);
+            data.equipFragments.green += fragGain.green;
+            data.equipFragments.blue += fragGain.blue;
+            data.equipFragments.purple += fragGain.purple;
+            data.equipmentBag = data.equipmentBag.filter(function(e) { return e.id !== eqId; });
+            showToast('🔨 分解 ' + eq.name + '！获得' + (fragGain.green||0) + '绿' + (fragGain.blue||0) + '蓝' + (fragGain.purple||0) + '紫碎片');
+            autoSave(); openEquipmentBag();
+        }
+        function upgradeEquipQuality(eqId) {
+            var eq = data.equipmentBag.find(function(e) { return e.id === eqId; });
+            if (!eq) return;
+            var curQ = getEquipQuality(eq);
+            var curIdx = EQUIP_QUALITY_ORDER.indexOf(curQ);
+            if (curIdx >= EQUIP_QUALITY_ORDER.length - 1) { showToast('已达最高品质'); return; }
+            var nextQ = EQUIP_QUALITY_ORDER[curIdx + 1];
+            var cost = curIdx === 0 ? { green:3 } : curIdx === 1 ? { green:5, blue:2 } : { blue:5, purple:1 };
+            var goldCost = 30 + curIdx * 20;
+            // 检查碎片
+            for (var k in cost) { if ((data.equipFragments[k]||0) < cost[k]) { showToast('碎片不足：需要' + (cost[k]) + '个' + EQUIP_QUALITY_NAMES[k === 'green' ? 'green' : k === 'blue' ? 'blue' : 'purple'] + '碎片'); return; } }
+            if (data.hero.gold < goldCost) { showToast('金币不足：需要' + goldCost); return; }
+            // 扣除
+            for (var k2 in cost) data.equipFragments[k2] -= cost[k2];
+            data.hero.gold -= goldCost;
+            eq.quality = nextQ;
+            showToast('✨ ' + eq.name + ' 升级为' + EQUIP_QUALITY_NAMES[nextQ] + '品质！');
+            showFloatingMsg('✨ 品质提升!', 'drop');
+            recalcHeroStats(); autoSave(); updateHeroPanel(); openEquipmentBag();
+        }
+
+        // ==================== 【功能2b】转生轮回商店 ====================
+        var REBIRTH_SHOP_ITEMS = [
+            { id:'resetTicket', name:'🧬 天赋重置券', desc:'重置所有已分配天赋点', costType:'points', cost:1 },
+            { id:'skillShard', name:'📜 传奇技能碎片', desc:'集齐5片可自选一个证书技能', costType:'gold', cost:200 },
+            { id:'petSkin1', name:'🎨 限定皮肤·暗影', desc:'宠物获得暗影外观', costType:'points', cost:2 },
+            { id:'petSkin2', name:'🎨 限定皮肤·黄金', desc:'宠物获得黄金外观', costType:'gold', cost:500 },
+        ];
+        function buyRebirthShopItem(itemId) {
+            var item = REBIRTH_SHOP_ITEMS.find(function(i) { return i.id === itemId; });
+            if (!item) return;
+            var rb = data.rebirth || { rebirthPoints:0 };
+            if (item.costType === 'points') {
+                if ((rb.rebirthPoints||0) < item.cost) { showToast('转生点数不足'); return; }
+                rb.rebirthPoints -= item.cost;
+            } else {
+                if (data.hero.gold < item.cost) { showToast('金币不足'); return; }
+                data.hero.gold -= item.cost;
+            }
+            if (item.id === 'resetTicket') {
+                // 天赋重置
+                Object.keys(data.talents || {}).forEach(function(k) { rb.talentPoints = (rb.talentPoints||0) + (data.talents[k]||0); data.talents[k] = 0; });
+                showToast('🧬 天赋已重置！所有天赋点已返还');
+            } else if (item.id === 'skillShard') {
+                data.rebirthShop.skillShards = (data.rebirthShop.skillShards||0) + 1;
+                if (data.rebirthShop.skillShards >= 5) {
+                    data.rebirthShop.skillShards -= 5;
+                    showToast('📜 集齐5片！请前往证书技能页面选择一个技能');
+                    // TODO: 让玩家选择一个证书技能
+                } else {
+                    showToast('📜 获得传奇技能碎片！（' + data.rebirthShop.skillShards + '/5）');
+                }
+            } else if (item.id.startsWith('petSkin')) {
+                if (!data.pet) { showToast('需要先有宠物'); return; }
+                if (!data.pet.skins) data.pet.skins = [];
+                var skinName = item.id === 'petSkin1' ? 'shadow' : 'golden';
+                if (data.pet.skins.includes(skinName)) { showToast('已拥有此皮肤'); if (item.costType === 'points') rb.rebirthPoints += item.cost; else data.hero.gold += item.cost; return; }
+                data.pet.skins.push(skinName);
+                showToast('🎨 获得限定宠物皮肤！');
+            }
+            autoSave(); render();
+        }
+
+        // ==================== 【功能3】数据驾驶舱 · 热力图与趋势 ====================
+        function getDailyScore(entry) {
+            return (entry.habits||0)*1 + (entry.dailies||0)*2 + (entry.todos||0)*3 + (entry.questsCleared||0)*5;
+        }
+        function renderHeatmap(canvasId) {
+            var canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var log = (data.stats && data.stats.log) || [];
+            var todayEntry = data.stats && data.stats.todayActions ? data.stats.todayActions : {};
+            // 构建过去365天的数据
+            var dayMap = {};
+            log.forEach(function(e) { dayMap[e.date] = getDailyScore(e); });
+            var todayScore = getDailyScore(todayEntry);
+            var today = todayLocal();
+            dayMap[today] = todayScore;
+            // 绘制参数
+            var cellSize = 12, gap = 3, weekCount = 53, dayCount = 7;
+            var labelW = 24, labelH = 20;
+            canvas.width = labelW + weekCount * (cellSize + gap);
+            canvas.height = labelH + dayCount * (cellSize + gap);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // 月份标签
+            ctx.font = '10px sans-serif';
+            ctx.fillStyle = '#999';
+            var monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+            var startDate = new Date(); startDate.setDate(startDate.getDate() - 364);
+            var curMonth = -1;
+            for (var w = 0; w < weekCount; w++) {
+                var weekDate = new Date(startDate); weekDate.setDate(weekDate.getDate() + w * 7);
+                var m = weekDate.getMonth();
+                if (m !== curMonth) { curMonth = m; ctx.fillText(monthNames[m], labelW + w * (cellSize + gap), labelH - 4); }
+            }
+            // 绘制格子
+            var maxScore = 1;
+            Object.values(dayMap).forEach(function(s) { if (s > maxScore) maxScore = s; });
+            for (var w2 = 0; w2 < weekCount; w2++) {
+                for (var d = 0; d < dayCount; d++) {
+                    var cellDate = new Date(startDate);
+                    cellDate.setDate(cellDate.getDate() + w2 * 7 + d);
+                    if (cellDate > new Date()) continue;
+                    var dateStr = cellDate.getFullYear() + '-' + String(cellDate.getMonth()+1).padStart(2,'0') + '-' + String(cellDate.getDate()).padStart(2,'0');
+                    var score = dayMap[dateStr] || 0;
+                    var ratio = score / maxScore;
+                    var color = score === 0 ? '#ebedf0' : ratio < 0.25 ? '#c6e48b' : ratio < 0.5 ? '#7bc96f' : ratio < 0.75 ? '#239a3b' : '#196127';
+                    ctx.fillStyle = color;
+                    ctx.fillRect(labelW + w2 * (cellSize + gap), labelH + d * (cellSize + gap), cellSize, cellSize);
+                }
+            }
+        }
+        function renderTrendChart(canvasId, metric) {
+            var canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var log = (data.stats && data.stats.log) || [];
+            canvas.width = canvas.parentElement.offsetWidth - 20;
+            canvas.height = 160;
+            var w = canvas.width, h = canvas.height;
+            ctx.clearRect(0, 0, w, h);
+            // 收集近30天数据
+            var points = [];
+            var today = todayLocal();
+            for (var i = 29; i >= 0; i--) {
+                var d = new Date(); d.setDate(d.getDate() - i);
+                var ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+                var entry = log.find(function(e) { return e.date === ds; });
+                var val = 0;
+                if (entry) {
+                    if (metric === 'score') val = getDailyScore(entry);
+                    else if (metric === 'habits') val = entry.habits || 0;
+                    else if (metric === 'dailies') val = entry.dailies || 0;
+                    else if (metric === 'monsters') val = entry.monsters || 0;
+                }
+                if (ds === today && data.stats && data.stats.todayActions) {
+                    var ta = data.stats.todayActions;
+                    if (metric === 'score') val = getDailyScore(ta);
+                    else if (metric === 'habits') val = ta.habits || 0;
+                    else if (metric === 'dailies') val = ta.dailies || 0;
+                    else if (metric === 'monsters') val = ta.monsters || 0;
+                }
+                points.push(val);
+            }
+            var maxVal = Math.max(1, Math.max.apply(null, points));
+            var padL = 30, padR = 10, padT = 10, padB = 20;
+            var chartW = w - padL - padR, chartH = h - padT - padB;
+            // 网格线
+            ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 1;
+            for (var g = 0; g <= 4; g++) {
+                var y = padT + chartH * (1 - g/4);
+                ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+                ctx.fillStyle = '#999'; ctx.font = '9px sans-serif';
+                ctx.fillText(Math.round(maxVal * g / 4), 4, y + 3);
+            }
+            // 折线
+            ctx.strokeStyle = '#b8730b'; ctx.lineWidth = 2;
+            ctx.beginPath();
+            points.forEach(function(v, i) {
+                var x = padL + (chartW / 29) * i;
+                var y = padT + chartH * (1 - v / maxVal);
+                if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+            // 填充
+            ctx.lineTo(padL + chartW, padT + chartH); ctx.lineTo(padL, padT + chartH);
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(184,115,11,0.1)'; ctx.fill();
+            // 数据点
+            points.forEach(function(v, i) {
+                var x = padL + (chartW / 29) * i;
+                var y = padT + chartH * (1 - v / maxVal);
+                ctx.fillStyle = '#b8730b'; ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI*2); ctx.fill();
+            });
+        }
+        function getPeakTimeAnalysis() {
+            var log = (data.stats && data.stats.log) || [];
+            var ta = (data.stats && data.stats.todayActions) || {};
+            var timeSlots = [0,0,0,0,0,0,0,0]; // 8个3小时时段
+            var labels = ['00-03','03-06','06-09','09-12','12-15','15-18','18-21','21-24'];
+            // 从 stats.log 中分析（如果有 timestamps）
+            log.forEach(function(e) {
+                if (e.timestamps && Array.isArray(e.timestamps)) {
+                    e.timestamps.forEach(function(ts) {
+                        var hour = new Date(ts).getHours();
+                        var slot = Math.floor(hour / 3);
+                        timeSlots[slot]++;
+                    });
+                }
+            });
+            // 也分析今天的
+            if (ta.timestamps && Array.isArray(ta.timestamps)) {
+                ta.timestamps.forEach(function(ts) {
+                    var hour = new Date(ts).getHours();
+                    var slot = Math.floor(hour / 3);
+                    timeSlots[slot]++;
+                });
+            }
+            var total = timeSlots.reduce(function(a,b) { return a+b; }, 0);
+            if (total === 0) return null;
+            var maxSlot = 0, maxVal = 0;
+            timeSlots.forEach(function(v, i) { if (v > maxVal) { maxVal = v; maxSlot = i; } });
+            return { labels:labels, slots:timeSlots, total:total, peakSlot:maxSlot, peakLabel:labels[maxSlot], peakPct:Math.round(maxVal/total*100) };
+        }
+
+        // ==================== 【功能4】天赋树深化 · 职业分支与专精 ====================
+        var HERO_CLASSES = {
+            warrior: { name:'战士', icon:'⚔️', desc:'力量/体质天赋上限+2级，暴击伤害额外+20%', branches:['力量','体质'], bonus:{ critDmg:0.2 } },
+            mage:    { name:'法师', icon:'🔮', desc:'智力天赋上限+2级，MP消耗额外-15%', branches:['智慧'], bonus:{ mpReduce:0.15 } },
+            hunter:  { name:'猎人', icon:'🏹', desc:'感知天赋上限+2级，连击加成翻倍', branches:['感知'], bonus:{ comboMult:2 } },
+        };
+        function selectHeroClass(cls) {
+            var rb = data.rebirth;
+            if (!rb) return;
+            if (rb.count < 1) { showToast('需要至少转生1次才能选择职业'); return; }
+            if (rb.heroClass === cls) { showToast('当前已是此职业'); return; }
+            // 切换职业消耗50金币
+            if (rb.heroClass && data.hero.gold < 50) { showToast('切换职业需要50金币'); return; }
+            if (rb.heroClass) { data.hero.gold -= 50; }
+            rb.heroClass = cls;
+            // 重置天赋点
+            if (data.talents) {
+                var refunded = 0;
+                Object.keys(data.talents).forEach(function(k) { refunded += data.talents[k] || 0; data.talents[k] = 0; });
+                rb.talentPoints = (rb.talentPoints || 0) + refunded;
+                showToast(HERO_CLASSES[cls].icon + ' 已切换为' + HERO_CLASSES[cls].name + '！天赋点已重置（返还' + refunded + '点）');
+            } else {
+                showToast(HERO_CLASSES[cls].icon + ' 已选择' + HERO_CLASSES[cls].name + '！');
+            }
+            recalcHeroStats(); autoSave(); render();
+        }
+        function getClassTalentMaxLevel(talentId) {
+            var tpl = TALENT_TEMPLATES[talentId];
+            if (!tpl) return 5;
+            var rb = data.rebirth || {};
+            var cls = HERO_CLASSES[rb.heroClass];
+            if (cls && cls.branches.includes(tpl.branch)) return tpl.maxLevel + 2;
+            return tpl.maxLevel;
+        }
+        function getClassBonus(type) {
+            var rb = data.rebirth || {};
+            var cls = HERO_CLASSES[rb.heroClass];
+            if (!cls) return 0;
+            if (type === 'critDmg') return cls.bonus.critDmg || 0;
+            if (type === 'mpReduce') return cls.bonus.mpReduce || 0;
+            if (type === 'comboMult') return cls.bonus.comboMult || 1;
+            return 0;
+        }
+        // 分支专精：同一分支每3点天赋激活一个专精效果
+        function getBranchSpecialization(branch) {
+            var total = 0;
+            Object.values(TALENT_TEMPLATES).forEach(function(t) {
+                if (t.branch === branch) total += getTalentLevel(t.id);
+            });
+            var level = Math.floor(total / 3);
+            var maxLevel = 2; // 6点满
+            var specs = {
+                '力量': { name:'吸血', desc:'攻击附带5%吸血', effect:'lifesteal' },
+                '智慧': { name:'悟道', desc:'每日任务经验+10%', effect:'dailyExp' },
+                '体质': { name:'刚毅', desc:'受到伤害-8%', effect:'dmgReduce' },
+                '感知': { name:'财运', desc:'金币掉落+15%', effect:'goldDrop' },
+            };
+            return { level:level, maxLevel:maxLevel, spec:specs[branch], progress:total % 3, total:total };
+        }
+        function getBranchSpecBonus(type) {
+            var bonus = 0;
+            TALENT_BRANCHES.forEach(function(branch) {
+                var spec = getBranchSpecialization(branch);
+                if (spec.level > 0 && spec.spec) {
+                    if (type === 'lifesteal' && spec.spec.effect === 'lifesteal') bonus += 0.05 * spec.level;
+                    if (type === 'dailyExp' && spec.spec.effect === 'dailyExp') bonus += 0.10 * spec.level;
+                    if (type === 'dmgReduce' && spec.spec.effect === 'dmgReduce') bonus += 0.08 * spec.level;
+                    if (type === 'goldDrop' && spec.spec.effect === 'goldDrop') bonus += 0.15 * spec.level;
+                }
+            });
+            return bonus;
+        }
+
+        // ==================== 【功能5】现实世界联动 · 地理签到与天气加成 ====================
+        var LOCATION_TYPES = {
+            home:     { name:'家', icon:'🏠', buff:'休息buff', buffDesc:'每日扣血-20%', effect:'dmgReduce', mult:0.8 },
+            office:   { name:'办公室', icon:'🏢', buff:'学习buff', buffDesc:'知识碎片+1', effect:'knowledgeFrag', mult:2 },
+            library:  { name:'图书馆', icon:'📚', buff:'学习buff', buffDesc:'知识碎片+1', effect:'knowledgeFrag', mult:2 },
+            gym:      { name:'健身房', icon:'💪', buff:'力量buff', buffDesc:'攻击力+10%', effect:'atk', mult:1.1, duration:2*60*60*1000 },
+            cafe:     { name:'咖啡馆', icon:'☕', buff:'灵感buff', buffDesc:'专注经验+10%', effect:'focusExp', mult:1.1 },
+        };
+        var WEATHER_BUFFS = {
+            sunny:  { name:'晴天', icon:'☀️', buff:'金币掉落+10%', effect:'goldDrop', mult:1.1 },
+            rainy:  { name:'雨天', icon:'🌧️', buff:'专注经验+15%', effect:'focusExp', mult:1.15 },
+            snowy:  { name:'下雪', icon:'❄️', buff:'宠物心情衰减减半', effect:'petMoodHalf', mult:0.5 },
+            cloudy: { name:'多云', icon:'☁️', buff:'无特殊加成', effect:null, mult:1 },
+        };
+        var MANUAL_SCENES = ['居家','通勤','办公','户外'];
+        function checkGeoLocation() {
+            if (!navigator.geolocation) { showToast('设备不支持定位'); return; }
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                // 简化：基于时间推断地点类型（无实际反查API）
+                var hour = new Date().getHours();
+                var locType;
+                if (hour >= 22 || hour < 7) locType = 'home';
+                else if (hour >= 9 && hour < 18) locType = Math.random() < 0.5 ? 'office' : 'library';
+                else if (hour >= 18 && hour < 20) locType = 'gym';
+                else locType = 'cafe';
+                data.envBuff.location = locType;
+                data.envBuff.lastUpdate = Date.now();
+                showToast(LOCATION_TYPES[locType].icon + ' 当前位置：' + LOCATION_TYPES[locType].name + ' · ' + LOCATION_TYPES[locType].buffDesc);
+                autoSave(); updateHeroPanel(); render();
+            }, function(err) {
+                showToast('定位失败，请手动选择场景');
+            }, { timeout:5000 });
+        }
+        function setManualScene(scene) {
+            var sceneMap = { '居家':'home', '通勤':'cafe', '办公':'office', '户外':'gym' };
+            data.envBuff.manualScene = scene;
+            data.envBuff.location = sceneMap[scene] || 'home';
+            data.envBuff.lastUpdate = Date.now();
+            showToast('已切换场景：' + scene);
+            autoSave(); updateHeroPanel(); render();
+        }
+        function checkWeather() {
+            // 使用 wttr.in 免费天气API（简化版，降级处理）
+            fetch('https://wttr.in/?format=j1').then(function(r) { return r.json(); }).then(function(w) {
+                var code = w.current_condition && w.current_condition[0] && w.current_condition[0].weatherCode;
+                var weather;
+                if (code && (code.startsWith('3') || code.startsWith('2'))) weather = 'cloudy';
+                else if (code && code.startsWith('1')) weather = 'sunny';
+                else if (code && code.startsWith('3') && code.includes('5')) weather = 'rainy';
+                else if (code && code.startsWith('3') && code.includes('8')) weather = 'snowy';
+                else weather = 'cloudy';
+                data.envBuff.weather = weather;
+                data.envBuff.lastUpdate = Date.now();
+                showToast(WEATHER_BUFFS[weather].icon + ' 当前天气：' + WEATHER_BUFFS[weather].name + ' · ' + WEATHER_BUFFS[weather].buff);
+                autoSave(); updateHeroPanel();
+            }).catch(function() {
+                // 降级：随机天气
+                var types = Object.keys(WEATHER_BUFFS);
+                data.envBuff.weather = types[Math.floor(Math.random() * types.length)];
+                autoSave();
+            });
+        }
+        function getEnvBuff(type) {
+            var env = data.envBuff;
+            if (!env || !env.lastUpdate) return 1;
+            // 检查是否过期（1小时）
+            if (Date.now() - env.lastUpdate > 3600000) return 1;
+            var mult = 1;
+            // 位置buff
+            if (env.location && LOCATION_TYPES[env.location]) {
+                var loc = LOCATION_TYPES[env.location];
+                if (loc.effect === type) mult *= loc.mult;
+            }
+            // 天气buff
+            if (env.weather && WEATHER_BUFFS[env.weather]) {
+                var w = WEATHER_BUFFS[env.weather];
+                if (w.effect === type) mult *= w.mult;
+            }
+            return mult;
+        }
+        function getEnvBuffDisplay() {
+            var env = data.envBuff || {};
+            var parts = [];
+            if (env.location && LOCATION_TYPES[env.location]) parts.push(LOCATION_TYPES[env.location].icon + LOCATION_TYPES[env.location].name);
+            if (env.weather && WEATHER_BUFFS[env.weather]) parts.push(WEATHER_BUFFS[env.weather].icon + WEATHER_BUFFS[env.weather].name);
+            return parts.length > 0 ? parts.join(' ') : null;
+        }
+        function openEnvBuffPanel() {
+            var el = document.getElementById('envBuffContent');
+            if (!el) return;
+            var env = data.envBuff || {};
+            var html = '';
+            // 当前状态
+            html += '<div class="card" style="margin-bottom:10px;padding:10px 14px;">';
+            if (env.location && LOCATION_TYPES[env.location]) {
+                var loc = LOCATION_TYPES[env.location];
+                html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:1.5em">'+loc.icon+'</span><div><div style="font-size:0.85em;font-weight:700">'+loc.name+'</div><div style="font-size:0.7em;color:var(--text3)">'+loc.buffDesc+'</div></div></div>';
+            } else {
+                html += '<div style="font-size:0.75em;color:var(--text3);margin-bottom:6px">尚未签到</div>';
+            }
+            if (env.weather && WEATHER_BUFFS[env.weather]) {
+                var w = WEATHER_BUFFS[env.weather];
+                html += '<div style="display:flex;align-items:center;gap:8px"><span style="font-size:1.5em">'+w.icon+'</span><div><div style="font-size:0.85em;font-weight:700">'+w.name+'</div><div style="font-size:0.7em;color:var(--text3)">'+w.buff+'</div></div></div>';
+            }
+            html += '</div>';
+            // 签到按钮
+            html += '<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">';
+            html += '<button class="btn sm accent" onclick="checkGeoLocation()">📍 GPS签到</button>';
+            html += '<button class="btn sm" onclick="checkWeather()">🌤️ 查询天气</button>';
+            html += '</div>';
+            // 手动选择场景
+            html += '<div class="card" style="padding:10px 14px;"><div style="font-size:0.75em;color:var(--text3);margin-bottom:6px">手动选择场景（无需定位）</div><div style="display:flex;gap:6px;flex-wrap:wrap">';
+            MANUAL_SCENES.forEach(function(s) {
+                var active = env.manualScene === s;
+                html += '<button class="btn sm '+(active?'accent':'')+'" onclick="setManualScene(\''+s+'\')">'+s+'</button>';
+            });
+            html += '</div></div>';
+            el.innerHTML = html;
+            document.getElementById('envBuffModal').classList.add('visible');
+        }
+
         // ==================== UI ====================
+        // 【新增】英雄头像进化 — Emoji 随等级变换 + 光晕随人生目标类型变化
+        function updateHeroAvatar() {
+            const el = document.getElementById('heroAvatar');
+            if (!el) return;
+            const lv = data.hero.level || 1;
+            // 1) 根据等级变换 Emoji
+            let emoji;
+            if (lv <= 5)       emoji = '⚔️';
+            else if (lv <= 10) emoji = '🗡️';
+            else if (lv <= 15) emoji = '🛡️';
+            else               emoji = '👑';
+            el.textContent = emoji;
+            // 2) 根据人生目标类型添加光晕
+            const types = (data.lifeGoals || []).map(g => g.type).filter(Boolean);
+            const uniqueTypes = [...new Set(types)];
+            // 清除旧光晕类
+            el.classList.remove('glow-career', 'glow-skill', 'glow-health', 'glow-finance', 'glow-creative', 'glow-multi');
+            if (uniqueTypes.length === 1) {
+                el.classList.add('glow-' + uniqueTypes[0]);
+            } else if (uniqueTypes.length > 1) {
+                el.classList.add('glow-multi');
+            }
+        }
+
         function updateHeroPanel() {
             const h = data.hero;
             document.getElementById('heroHp').textContent = h.hp;
@@ -4010,8 +5412,8 @@
             const mpEl = document.getElementById('mpBar'), mpPctEl = document.getElementById('mpPct');
             if (mpEl && h.maxMp) { const mpPct = Math.min(100, Math.round((h.mp / h.maxMp) * 100)); mpEl.style.width = mpPct + '%'; mpPctEl.textContent = mpPct + '%'; }
             else if (mpEl) { mpEl.style.width = '0%'; mpPctEl.textContent = '0%'; }
-            const avatars = ['⚔️', '🗡️', '🛡️', '⚜️', '👑', '🐉', '🌟'];
-            document.getElementById('heroAvatar').textContent = avatars[Math.min(h.level - 1, avatars.length - 1)] || '⚔️';
+            const avatars = ['⚔️', '🗡️', '🛡️', '⚜️', '👑', '🐉', '🌟']; // 保留向后兼容
+            updateHeroAvatar(); // 【新增】调用独立的头像进化函数
             // 宠物跟随显示
             const petEl = document.getElementById('petFollower');
             if (petEl) {
@@ -4060,6 +5462,24 @@
             }
             // 轮回能量条同步
             updateLoopEnergyBar();
+            // 【功能5】环境buff徽章
+            var envBadge = document.getElementById('envBuffBadge');
+            if (envBadge) {
+                var envDisplay = getEnvBuffDisplay();
+                if (envDisplay) { envBadge.style.display = ''; envBadge.textContent = '🌍 ' + envDisplay; envBadge.title = '当前环境加成（点击管理）'; }
+                else envBadge.style.display = 'none';
+            }
+            // P3: 转生徽章显示
+            const rbBadgeEl = document.getElementById('heroRebirthBadge');
+            if (rbBadgeEl) {
+                const rbCount = (data.rebirth && data.rebirth.count) || 0;
+                if (rbCount > 0) {
+                    rbBadgeEl.style.display = '';
+                    rbBadgeEl.textContent = `🔄 ${rbCount}世`;
+                    const tp = (data.rebirth && data.rebirth.talentPoints) || 0;
+                    rbBadgeEl.title = `第${rbCount}世轮回 · 可用天赋点: ${tp}\n金币加成: +${rbCount * 5}%${data._keptKnowledgePower > 0 ? `\n保留知识之力: ${data._keptKnowledgePower}` : ''}\n点击查看转生与天赋`;
+                } else rbBadgeEl.style.display = 'none';
+            }
             // 双倍经验buff徽章
             const buffEl = document.getElementById('expBuffBadge');
             if (buffEl) buffEl.style.display = (data.activeBuffs && data.activeBuffs.expPotionUntil > Date.now()) ? '' : 'none';
@@ -4083,6 +5503,19 @@
 
         let currentView = 'lifeGoals';
 
+        // P0: 渲染性能优化 — rAF 合并 + 滚动/焦点保持
+        let renderScheduled = false;
+
+        // 请求渲染（合并多次 render 调用为一帧一次，适用于高频操作如战斗连击）
+        function requestRender() {
+            if (renderScheduled) return;
+            renderScheduled = true;
+            requestAnimationFrame(() => {
+                renderScheduled = false;
+                render();
+            });
+        }
+
         function switchView(view) {
             if (currentView !== 'battle' && autoBattleInterval) stopAutoBattle(true); // 离开战斗视图时停止自动战斗
             resetCombo(); // 离开战斗时重置连击
@@ -4095,6 +5528,49 @@
         }
 
         function render() {
+            // P0: 渲染前保存滚动位置 + 输入焦点，渲染后恢复（防止 innerHTML 重绘导致失焦/跳顶）
+            const content = document.querySelector('.content');
+            const inner = document.getElementById('contentInner');
+            const active = document.activeElement;
+            let savedFocus = null;
+            if (active && inner && inner.contains(active) && /INPUT|TEXTAREA|SELECT/.test(active.tagName)) {
+                savedFocus = {
+                    id: active.id || null,
+                    tag: active.tagName,
+                    type: active.type || null,
+                    selStart: active.selectionStart,
+                    selEnd: active.selectionEnd,
+                    value: active.value,
+                };
+            }
+            const savedScroll = content ? { top: content.scrollTop, left: content.scrollLeft } : null;
+            // 执行实际渲染
+            _renderCore();
+            // 恢复滚动位置
+            if (savedScroll && content) {
+                content.scrollTop = savedScroll.top;
+                content.scrollLeft = savedScroll.left;
+            }
+            // 恢复焦点
+            if (savedFocus) {
+                let target = null;
+                if (savedFocus.id) target = document.getElementById(savedFocus.id);
+                if (!target && inner) {
+                    const inputs = inner.querySelectorAll(savedFocus.tag);
+                    for (const el of inputs) {
+                        if ((!savedFocus.type || el.type === savedFocus.type) && el.value === savedFocus.value) {
+                            target = el; break;
+                        }
+                    }
+                }
+                if (target) {
+                    target.focus();
+                    try { target.setSelectionRange(savedFocus.selStart || 0, savedFocus.selEnd || 0); } catch(e) {}
+                }
+            }
+        }
+
+        function _renderCore() {
             const inner = document.getElementById('contentInner');
             if (currentView === 'lifeGoals') renderLifeGoals(inner);
             else if (currentView === 'quests') renderQuests(inner);
@@ -4110,12 +5586,63 @@
             else if (currentView === 'storyBook') renderStoryBook(inner);
             else if (currentView === 'knowledgeTree') renderKnowledgeTrees(inner);
             else if (currentView === 'lifetime') renderLifetimeGoals(inner);
+            else if (currentView === 'rebirth') renderRebirth(inner); // P3: 转生天赋视图
             if (typeof bindHelpTips === 'function') setTimeout(bindHelpTips, 30);
         }
 
         function renderLifeGoals(container) {
             let html =
                 `<div class="section-header"><h2>🎯 人生规划</h2><p class="subtitle">输入长期目标，系统自动拆解为阶段性副本关卡，每个关卡包含多个怪物（待办任务）</p></div>`;
+            // ===== 【新增】全局仪表盘 =====
+            {
+                const achPoints = getAchievementPoints();
+                const kp = getKnowledgePower();
+                const now = new Date();
+                const monthPrefix = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+                const monthlyQuests = (data.stats.log || [])
+                    .filter(e => e.date && e.date.startsWith(monthPrefix))
+                    .reduce((sum, e) => sum + (e.questsCleared || 0), 0);
+                const totalQuests = data.quests.length;
+                const completedQuests = data.quests.filter(q => q.completed).length;
+                const progressPct = totalQuests > 0 ? Math.round((completedQuests / totalQuests) * 100) : 0;
+                const ringDeg = Math.round(progressPct * 3.6);
+                html += `
+                <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+                    <div class="card" style="flex:1;min-width:130px;padding:12px 14px;display:flex;align-items:center;gap:10px;">
+                        <span style="font-size:1.6em;">🏆</span>
+                        <div>
+                            <div style="font-size:0.68em;color:var(--text3);">总成就点数</div>
+                            <div style="font-size:1.3em;font-weight:800;color:var(--accent);">${achPoints}</div>
+                        </div>
+                    </div>
+                    <div class="card" style="flex:1;min-width:130px;padding:12px 14px;display:flex;align-items:center;gap:10px;">
+                        <span style="font-size:1.6em;">🧠</span>
+                        <div>
+                            <div style="font-size:0.68em;color:var(--text3);">知识之力</div>
+                            <div style="font-size:1.3em;font-weight:800;color:var(--exp);">${kp}</div>
+                        </div>
+                    </div>
+                    <div class="card" style="flex:1;min-width:130px;padding:12px 14px;display:flex;align-items:center;gap:10px;">
+                        <span style="font-size:1.6em;">⚔️</span>
+                        <div>
+                            <div style="font-size:0.68em;color:var(--text3);">本月通关副本</div>
+                            <div style="font-size:1.3em;font-weight:800;color:var(--success);">${monthlyQuests}</div>
+                        </div>
+                    </div>
+                    <div class="card" style="flex:0 0 auto;min-width:130px;padding:12px 14px;display:flex;align-items:center;gap:12px;">
+                        <div style="width:72px;height:72px;border-radius:50%;background:conic-gradient(var(--accent) 0deg, var(--accent) ${ringDeg}deg, var(--border) ${ringDeg}deg, var(--border) 360deg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <div style="width:54px;height:54px;border-radius:50%;background:var(--panel);display:flex;align-items:center;justify-content:center;flex-direction:column;">
+                                <span style="font-size:1.05em;font-weight:800;color:var(--accent);line-height:1;">${progressPct}%</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="font-size:0.68em;color:var(--text3);">规划总进度</div>
+                            <div style="font-size:0.82em;font-weight:700;color:var(--text2);">${completedQuests}/${totalQuests} 副本</div>
+                        </div>
+                    </div>
+                </div>`;
+            }
+            // ===== 【新增结束】 =====
             // 命运能量横幅：打通「副本 ↔ 命运主线」感知
             {
                 const fateCur = data.fateEnergy || 0;
@@ -4310,6 +5837,7 @@
                 }
                 html += `</div>`;
             });
+            html += renderSocialFriends(); // 【功能四】追加好友与排行榜区域
             container.innerHTML = html;
         }
 
@@ -4367,7 +5895,7 @@
                 <div class="monster-card ${monsterClass}" id="monster-${m.id}">
                     <span class="monster-icon">${icon}</span>
                     <div class="monster-info">
-                        <div class="monster-name">${esc(m.name)} ${m.isBoss?'<span class="tag boss-tag">👑 BOSS</span>':''} ${bossPhaseHtml} ${m.defeated?'<span class="tag easy">✅ 已击败</span>':''}</div>
+                        <div class="monster-name">${esc(m.name)} ${m.isBoss?'<span class="tag boss-tag">👑 BOSS</span>':''} ${m.element?'<span class="tag" style="font-size:0.6em;background:var(--accent-light);color:var(--accent);" title="'+ELEMENTS[m.element].name+'属性怪物">'+ELEMENTS[m.element].icon+ELEMENTS[m.element].name+'</span>':''} ${m.monsterType?'<span class="monster-type-badge '+m.monsterType+'" title="'+MONSTER_TYPES[m.monsterType].desc+'">'+MONSTER_TYPES[m.monsterType].icon+MONSTER_TYPES[m.monsterType].name+'</span>':''} ${m.elementAffix?'<span class="element-affix-icon" style="background:'+ELEMENTS[m.elementAffix].color||'#ff9800'+';color:#fff;">'+ELEMENTS[m.elementAffix].icon+'</span>':''} ${m.frozen?'<span class="tag" style="font-size:0.58em;background:#e3f2fd;color:#1565c0;">🧊冻结</span>':''} ${bossPhaseHtml} ${m.defeated?'<span class="tag easy">✅ 已击败</span>':''}</div>
                         <div class="monster-hp-bar" style="${m.isBoss?'height:14px;border-radius:7px;':''}"><div class="monster-hp-fill" style="width:${hpPct}%;${m.isBoss?'background:linear-gradient(90deg,#8b1a4a,#c0395a);':''}"></div></div>
                         <div class="monster-hp-text">❤️ ${m.hp}/${m.maxHp} · <span class="tag ${m.difficulty==='hard'?'hard':m.difficulty==='medium'?'medium':'easy'}">${DIFFICULTY_CONFIG[m.difficulty]?.label||'中等'}</span></div>
                     </div>
@@ -4380,18 +5908,19 @@
                     html += `<div class="skill-bar"><div style="width:100%;font-size:0.72em;color:var(--text3);margin-bottom:4px">🔵 MP: ${data.hero.mp}/${data.hero.maxMp}</div>`;
                     const aliveMonsters = quest.monsters.filter(m => !m.defeated);
                     learnedSkills.forEach(s => {
-                        const canUse = data.hero.mp >= s.mpCost;
+                        const actualCost = Math.max(0, Math.ceil(s.mpCost * talentMpReduceMult())); // P3: 显示天赋减免后MP消耗
+                        const canUse = data.hero.mp >= actualCost;
                         if (s.id === 'fireball') {
                             // 火球术需指定单体目标：为每个存活怪物生成独立按钮
                             if (aliveMonsters.length === 0) {
-                                html += `<button class="skill-btn" disabled title="${s.desc}"><span class="skill-icon">${s.icon}</span><span>${s.name.split(' ')[1]||s.name}</span><span class="skill-cost">${s.mpCost}MP</span></button>`;
+                                html += `<button class="skill-btn" disabled title="${s.desc}"><span class="skill-icon">${s.icon}</span><span>${s.name.split(' ')[1]||s.name}</span><span class="skill-cost">${actualCost}MP</span></button>`;
                             } else {
                                 aliveMonsters.forEach(m => {
                                     const shortName = m.name.length > 4 ? m.name.slice(0,4)+'…' : m.name;
                                     html += `<button class="skill-btn" ${canUse?'':'disabled'} onclick="useSkill('${s.id}','${quest.id}','${m.id}')" title="${s.desc} → ${m.name}">
                                         <span class="skill-icon">${s.icon}</span>
                                         <span>火球→${shortName}</span>
-                                        <span class="skill-cost">${s.mpCost}MP</span>
+                                        <span class="skill-cost">${actualCost}MP</span>
                                     </button>`;
                                 });
                             }
@@ -4399,7 +5928,7 @@
                             html += `<button class="skill-btn" ${canUse?'':'disabled'} onclick="useSkill('${s.id}','${quest.id}',null)" title="${s.desc}">
                                 <span class="skill-icon">${s.icon}</span>
                                 <span>${s.name.split(' ')[1]||s.name}</span>
-                                <span class="skill-cost">${s.mpCost}MP</span>
+                                <span class="skill-cost">${actualCost}MP</span>
                             </button>`;
                         }
                     });
@@ -4464,7 +5993,7 @@
 
         function renderHabits(container) {
             let html =
-                `<div class="section-header"><h2>🔄 习惯追踪</h2><p class="subtitle">正面习惯点击👍获奖励 · 负面习惯点击👎扣血</p></div><div class="filter-bar"><select id="habitFilter" onchange="render()"><option value="all">全部</option><option value="positive">👍正面</option><option value="negative">👎负面</option></select><button class="btn accent sm" onclick="showAddHabit()">＋新习惯</button></div>`;
+                `<div class="section-header"><h2>🔄 习惯追踪</h2><p class="subtitle">正面习惯点击👍获奖励 · 负面习惯点击👎扣血</p></div><div class="filter-bar"><select id="habitFilter" onchange="requestRender()"><option value="all">全部</option><option value="positive">👍正面</option><option value="negative">👎负面</option></select><button class="btn accent sm" onclick="showAddHabit()">＋新习惯</button></div>`;
             let habits = [...data.habits];
             const f = document.getElementById('habitFilter')?.value || 'all';
             if (f !== 'all') habits = habits.filter(h => h.type === f);
@@ -4480,7 +6009,7 @@
 
         function renderDailies(container) {
             let html =
-                `<div class="section-header"><h2>📅 每日待办</h2><p class="subtitle">每日重置·未完成次日扣血</p></div><div class="filter-bar"><select id="dailyFilter" onchange="render()"><option value="all">全部</option><option value="pending">⏳未完成</option><option value="done">✅已完成</option></select><button class="btn accent sm" onclick="showAddDaily()">＋新每日</button></div>`;
+                `<div class="section-header"><h2>📅 每日待办</h2><p class="subtitle">每日重置·未完成次日扣血</p></div><div class="filter-bar"><select id="dailyFilter" onchange="requestRender()"><option value="all">全部</option><option value="pending">⏳未完成</option><option value="done">✅已完成</option></select><button class="btn accent sm" onclick="showAddDaily()">＋新每日</button></div>`;
             let dailies = [...data.dailies];
             const f = document.getElementById('dailyFilter')?.value || 'all';
             if (f === 'pending') dailies = dailies.filter(d => !d.completedToday);
@@ -4497,7 +6026,7 @@
 
         function renderTodos(container) {
             let html =
-                `<div class="section-header"><h2>📋 待办事项</h2><p class="subtitle">一次性任务·完成获1.5倍奖励</p></div><div class="filter-bar"><select id="todoFilter" onchange="render()"><option value="all">全部</option><option value="pending">⏳未完成</option><option value="done">✅已完成</option></select><button class="btn accent sm" onclick="showAddTodo()">＋新待办</button></div>`;
+                `<div class="section-header"><h2>📋 待办事项</h2><p class="subtitle">一次性任务·完成获1.5倍奖励</p></div><div class="filter-bar"><select id="todoFilter" onchange="requestRender()"><option value="all">全部</option><option value="pending">⏳未完成</option><option value="done">✅已完成</option></select><button class="btn accent sm" onclick="showAddTodo()">＋新待办</button></div>`;
             let todos = [...data.todos];
             const f = document.getElementById('todoFilter')?.value || 'all';
             if (f === 'pending') todos = todos.filter(t => !t.done);
@@ -4581,6 +6110,12 @@
                 <div class="ach-summary-item"><span class="num">${data.titles.length}</span><span class="lbl">已获称号</span></div>
                 <div class="ach-summary-item"><button class="btn sm" onclick="openTitleSelector()">🏷 称号管理</button></div>
             </div>`;
+            // 【功能3】数据驾驶舱
+            html += '<div class="card" style="margin-bottom:12px;padding:14px;"><div style="font-weight:700;font-size:0.85em;margin-bottom:8px">📊 自律热力图（近365天）</div><div class="heatmap-container"><canvas id="heatmapCanvas"></canvas></div>';
+            var peak = getPeakTimeAnalysis();
+            if (peak) html += '<div style="font-size:0.72em;color:var(--text3);margin-top:6px">⏰ 效率峰值时段：' + peak.peakLabel + '（完成' + peak.peakPct + '%的任务）</div>';
+            html += '</div>';
+            html += '<div class="card" style="margin-bottom:12px;padding:14px;"><div style="font-weight:700;font-size:0.85em;margin-bottom:8px">📈 30天趋势 · <select id="trendMetric" onchange="renderTrendChart(\'trendCanvas\', this.value)" style="font-size:0.8em"><option value="score">自律积分</option><option value="habits">习惯数</option><option value="dailies">每日数</option><option value="monsters">击杀怪物</option></select></div><canvas id="trendCanvas"></canvas></div>';
             // 分类标签栏
             html += '<div class="tab-bar ach-cat-bar">';
             ACH_CATEGORIES.forEach(cat => {
@@ -4614,6 +6149,11 @@
             });
             html += '</div>';
             container.innerHTML = html;
+            // 【功能3】渲染热力图和趋势图
+            setTimeout(function() {
+                renderHeatmap('heatmapCanvas');
+                renderTrendChart('trendCanvas', 'score');
+            }, 50);
         }
 
         function renderAdventureLog() {
@@ -4876,6 +6416,7 @@
         }
         function gainLoopEnergy(amount) {
             if (!data.story) return;
+            amount = Math.round(amount * getSceneBonus('loopEnergy')); // 【功能五】星空场景轮回能量+10%
             data.story.loopEnergy = Math.min(100, (data.story.loopEnergy || 0) + amount);
             updateLoopEnergyBar();
         }
@@ -5279,6 +6820,7 @@
             return (data.extendedModules && data.extendedModules.knowledgeFragments) || 0;
         }
         function addKnowledgeFragments(amount, source) {
+            amount = amount * getSceneBonus('knowledgeFrag') * getEnvBuff('knowledgeFrag'); // 【功能5】场景+环境加成
             if (!data.extendedModules) data.extendedModules = { knowledgeTrees: [], studyStreak: { lastDate:'', days:0 }, lifetimeGoals: [], knowledgeFragments: 0 };
             data.extendedModules.knowledgeFragments = (data.extendedModules.knowledgeFragments || 0) + amount;
             if (!data.stats) data.stats = { critCount:0, totalAttacks:0, bossesKilled:0, questsCleared:0, totalMonstersKilled:0, totalFragmentsCollected:0, todayActions:{date:'',habits:0,dailies:0,todos:0}, log:[] };
@@ -5917,17 +7459,113 @@
         // ==================== 弹窗 ====================
         function closeModal(id) { document.getElementById(id).classList.remove('visible'); }
 
+        // ===== 【新增】人生目标预设模板数据 =====
+        const LIFE_GOAL_PRESETS = {
+            coder: {
+                name: '3年内晋升高级前端工程师',
+                type: 'career',
+                months: 36,
+                desc: '从初级前端出发，系统掌握主流框架原理与工程化能力，积累开源影响力，最终完成职级跃迁。'
+            },
+            fitness: {
+                name: '6个月减脂15斤并完成半马',
+                type: 'health',
+                months: 6,
+                desc: '从零开始建立运动习惯，逐步提升有氧能力与力量水平，最终完成半程马拉松挑战。'
+            },
+            finance: {
+                name: '5年达成被动收入覆盖日常支出',
+                type: 'finance',
+                months: 60,
+                desc: '系统盘点财务状况，建立应急基金与定投计划，逐步构建多元化资产组合，实现财务自由。'
+            }
+        };
+
+        // ===== 【新增】预设模板切换 — 自动填充表单字段 =====
+        function onLgPresetChange() {
+            const key = document.getElementById('lgPreset').value;
+            if (!key) return; // 选回"请选择"时不操作
+            const p = LIFE_GOAL_PRESETS[key];
+            if (!p) return;
+            document.getElementById('lgName').value = p.name;
+            document.getElementById('lgType').value = p.type;
+            document.getElementById('lgMonths').value = p.months;
+            document.getElementById('lgDesc').value = p.desc;
+            // 【新增】同步向导 UI
+            lgSelectType(p.type);
+            const LG_MONTHS_OPTIONS = [3, 6, 12, 24];
+            const idx = LG_MONTHS_OPTIONS.indexOf(p.months);
+            if (idx >= 0) {
+                document.getElementById('lgMonthsSlider').value = idx;
+                lgSliderChange();
+            }
+        }
+
+        // ===== 【新增】分步向导控制逻辑 =====
+        let lgWizardStep = 1;
+        const LG_MONTHS_OPTIONS = [3, 6, 12, 24];
+
+        function lgSelectType(type) {
+            document.getElementById('lgType').value = type;
+            document.querySelectorAll('.lg-type-card').forEach(c => {
+                c.classList.toggle('selected', c.dataset.type === type);
+            });
+        }
+
+        function lgSliderChange() {
+            const idx = parseInt(document.getElementById('lgMonthsSlider').value);
+            const months = LG_MONTHS_OPTIONS[idx];
+            document.getElementById('lgMonths').value = months;
+            document.getElementById('lgMonthsDisplay').textContent = months + ' 个月';
+        }
+
+        function lgGoToStep(n) {
+            lgWizardStep = n;
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('lgStep' + i).style.display = (i === n) ? '' : 'none';
+                const dot = document.getElementById('lgDot' + i);
+                dot.classList.remove('active', 'done');
+                if (i < n) dot.classList.add('done');
+                else if (i === n) dot.classList.add('active');
+            }
+            document.getElementById('lgLine1').classList.toggle('done', n >= 2);
+            document.getElementById('lgLine2').classList.toggle('done', n >= 3);
+            document.getElementById('lgPrevBtn').style.display = (n > 1) ? '' : 'none';
+            document.getElementById('lgNextBtn').style.display = (n < 3) ? '' : 'none';
+            document.getElementById('lgFinishBtn').style.display = (n === 3) ? '' : 'none';
+            if (n === 3) setTimeout(() => document.getElementById('lgName').focus(), 100);
+        }
+
+        function lgNextStep() {
+            if (lgWizardStep === 1) {
+                if (!document.getElementById('lgType').value) { showToast('请选择一个领域'); return; }
+                lgGoToStep(2);
+            } else if (lgWizardStep === 2) {
+                lgGoToStep(3);
+            }
+        }
+
+        function lgPrevStep() {
+            if (lgWizardStep > 1) lgGoToStep(lgWizardStep - 1);
+        }
+
         function showAddLifeGoal() { document.getElementById('lgModalTitle').textContent = '🎯 设定人生目标';
+            document.getElementById('lgPreset').value = ''; // 重置预设下拉
             document.getElementById('lgName').value = '';
             document.getElementById('lgType').value = 'career';
             document.getElementById('lgMonths').value = '12';
             document.getElementById('lgDesc').value = '';
             document.getElementById('lgEditId').value = '';
+            // 【新增】重置向导到步骤1
+            lgSelectType('career');
+            document.getElementById('lgMonthsSlider').value = 2;
+            lgSliderChange();
+            lgGoToStep(1);
             document.getElementById('lifeGoalModal').classList.add('visible');
             if (getLifetimeGoals().length === 0) {
                 showToast('💡 小贴士：先在「命运主线」确立终极使命，副本通关积累的命运能量才能推动主线哦');
             }
-            setTimeout(() => document.getElementById('lgName').focus(), 100); }
+        }
 
         function showAddHabit() { /* 简化弹窗 */ const name = prompt('习惯名称：'); if (!name) return; const type = confirm(
                 '是正面习惯吗？(确定=正面, 取消=负面)') ? 'positive' : 'negative';
@@ -6191,7 +7829,7 @@
             html += '</div>';
             container.innerHTML = html;
         }
-        function openPetPanel() {
+        function _openPetPanel_old_disabled() {
             renderPetContent(document.getElementById('petPanelContent'));
             document.getElementById('petModal').classList.add('visible');
         }
@@ -7024,12 +8662,21 @@
             el.className = 'screen-flash ' + (type || '');
             document.body.appendChild(el);
             setTimeout(() => el.remove(), 400);
+            // P2: 移动端触觉反馈
+            hapticFeedback(type === 'crit-flash' ? 15 : type === 'death-flash' ? 20 : 10);
         }
         function screenShake(selector) {
             const target = selector ? document.querySelector(selector) : document.querySelector('.battle-scene');
             if (!target) return;
             target.classList.add('screen-shake-anim');
             setTimeout(() => target.classList.remove('screen-shake-anim'), 400);
+        }
+
+        // P2: 移动端震动反馈 — 攻击命中/暴击/升级时震动
+        function hapticFeedback(ms) {
+            if (navigator.vibrate) {
+                try { navigator.vibrate(ms); } catch(e) {}
+            }
         }
 
         // ---- 升级特效增强 ----
@@ -7151,16 +8798,65 @@
             document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';
             localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light'); }
 
-        function exportData() { const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }); const a =
-                document.createElement('a');
+        // P0: 增强导出 — 支持密码加密导出
+        async function exportData(password) {
+            const jsonStr = JSON.stringify(data, null, 2);
+            let exportContent = jsonStr;
+            let fileName = `RPG进度_${todayLocal()}.json`;
+            if (password) {
+                try {
+                    const enc = new TextEncoder();
+                    const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+                    const salt = crypto.getRandomValues(new Uint8Array(16));
+                    const key = await crypto.subtle.deriveKey(
+                        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+                        keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['encrypt']
+                    );
+                    const iv = crypto.getRandomValues(new Uint8Array(12));
+                    const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(jsonStr));
+                    const combined = new Uint8Array(salt.length + iv.length + encrypted.byteLength);
+                    combined.set(salt, 0); combined.set(iv, salt.length); combined.set(new Uint8Array(encrypted), salt.length + iv.length);
+                    exportContent = 'ENC:' + btoa(String.fromCharCode(...combined));
+                    fileName = `RPG进度_${todayLocal()}_加密.json`;
+                } catch(e) { console.error('加密失败，回退明文:', e); showToast('加密失败，已导出明文'); }
+            }
+            const blob = new Blob([exportContent], { type: 'application/json' });
+            const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = `RPG进度_${todayLocal()}.json`;
+            a.download = fileName;
             a.click();
             URL.revokeObjectURL(a.href);
-            showToast('数据已导出'); }
+            showToast(password ? '已加密导出' : '数据已导出');
+        }
 
         function importData(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader();
-            reader.onload = (e) => { try { const imported = JSON.parse(e.target.result); if (imported.habits && imported
+            reader.onload = async (e) => {
+                try {
+                    let text = e.target.result;
+                    // P0: 支持加密导入
+                    if (text.startsWith('ENC:')) {
+                        const password = prompt('此存档已加密，请输入密码：');
+                        if (!password) { showToast('已取消导入'); return; }
+                        try {
+                            const combined = Uint8Array.from(atob(text.slice(4)), c => c.charCodeAt(0));
+                            const salt = combined.slice(0, 16);
+                            const iv = combined.slice(16, 28);
+                            const encrypted = combined.slice(28);
+                            const enc = new TextEncoder();
+                            const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+                            const key = await crypto.subtle.deriveKey(
+                                { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+                                keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+                            );
+                            const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, encrypted);
+                            text = new TextDecoder().decode(decrypted);
+                        } catch(decErr) { showToast('密码错误或文件损坏'); return; }
+                    }
+                    const imported = JSON.parse(text);
+                    // P0: 导入前校验数据模式
+                    const schemaCheck = validateDataSchema(imported);
+                    if (!schemaCheck.valid) { showToast('存档格式校验失败: ' + schemaCheck.reason); return; }
+                    if (imported.habits && imported
                         .dailies && imported.todos && imported.hero) { if (!confirm('导入将覆盖当前数据，确认？')) return;
                         data = imported; if (!data.lifeGoals) data.lifeGoals = []; if (!data.quests) data.quests = [];
                         data.quests.forEach(q => { if (!q.monsters) q.monsters = []; });
@@ -7252,7 +8948,10 @@
                     .tagName) && e.key >= '1' && e.key <= '5') { const views = ['lifeGoals', 'quests', 'habits',
                     'dailies', 'todos'
                 ];
-                switchView(views[parseInt(e.key) - 1]); } });
+                switchView(views[parseInt(e.key) - 1]); }
+            // P1: Ctrl+` 切换调试面板
+            if (e.ctrlKey && e.key === '`') { e.preventDefault(); toggleDebugPanel(); }
+            });
 
         // ==================== 主动技能系统 ====================
         const SKILL_TEMPLATES = {
@@ -7269,11 +8968,13 @@
             Object.values(SKILL_TEMPLATES).forEach(s => {
                 const learned = data.skills.includes(s.id);
                 const canBuy = s.source === 'shop' && !learned && data.hero.gold >= s.cost;
+                const actCost = Math.max(0, Math.ceil(s.mpCost * talentMpReduceMult())); // P3: 天赋减免后MP消耗
+                const hasReduce = actCost < s.mpCost;
                 html += `<div class="equip-slot ${learned?'enchanted':''}">
                     <span class="eq-icon">${s.icon}</span>
                     <div class="eq-info"><div class="eq-name">${s.name} ${learned?'<span class="eq-level">已学</span>':''}</div>
                     <div class="eq-bonus">${s.desc}</div>
-                    <div class="eq-bonus" style="color:#9f7aea">消耗 ${s.mpCost} MP ${s.source==='shop'?'· 商店售价 🪙'+s.cost:''}</div></div>
+                    <div class="eq-bonus" style="color:#9f7aea">消耗 ${hasReduce?`<span style="text-decoration:line-through;opacity:0.5">${s.mpCost}</span> <strong>${actCost}</strong>`:actCost} MP ${s.source==='shop'?'· 商店售价 🪙'+s.cost:''}</div></div>
                     <div class="eq-actions">${learned?'<span style="font-size:0.7em;color:var(--success)">✅ 已掌握</span>':(s.source==='shop'?`<button class="btn accent sm" ${canBuy?'':'disabled'} onclick="learnSkill('${s.id}')">购买学习</button>`:'<span style="font-size:0.66em;color:var(--text3)">仅副本掉落</span>')}</div>
                 </div>`;
             });
@@ -7296,8 +8997,9 @@
         function useSkill(skillId, questId, monsterId) {
             const s = SKILL_TEMPLATES[skillId];
             if (!s || !data.skills.includes(skillId)) return;
-            if (data.hero.mp < s.mpCost) { showToast('🔵 MP 不足'); return; }
-            data.hero.mp -= s.mpCost;
+            const actualMpCost = Math.max(0, Math.ceil(s.mpCost * talentMpReduceMult())); // P3: 天赋节能施法减免
+            if (data.hero.mp < actualMpCost) { showToast('🔵 MP 不足'); return; }
+            data.hero.mp -= actualMpCost;
             const quest = data.quests.find(q => q.id === questId);
             if (!quest) return;
             if (!data.battleState || data.battleState.questId !== questId) {
@@ -7336,7 +9038,7 @@
                 });
             } else if (skillId === 'fireball') {
                 const m = quest.monsters.find(x => x.id === monsterId && !x.defeated);
-                if (!m) { showToast('目标无效'); data.hero.mp += s.mpCost; return; }
+                if (!m) { showToast('目标无效'); data.hero.mp += actualMpCost; return; }
                 const baseAtk = data.hero.str + Math.floor(data.hero.level * 0.5);
                 const dmg = Math.floor(baseAtk * 2.5);
                 m.hp = Math.max(0, m.hp - dmg);
@@ -7413,26 +9115,47 @@
         }
         function openEquipmentBag() {
             const c = document.getElementById('equipModalContent');
+            var frag = data.equipFragments || { green:0, blue:0, purple:0 };
+            var html = '<div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">';
+            html += '<span class="equip-fragment-badge green">🟢 碎片×'+frag.green+'</span>';
+            html += '<span class="equip-fragment-badge blue">🔵 碎片×'+frag.blue+'</span>';
+            html += '<span class="equip-fragment-badge purple">🟣 碎片×'+frag.purple+'</span>';
+            html += '</div>';
+            // 【功能1】元素核心插槽
+            html += '<div style="margin-bottom:10px"><div style="font-size:0.72em;color:var(--text3);margin-bottom:5px">🔮 元素核心（切换普攻属性）</div><div style="display:flex;gap:6px;flex-wrap:wrap">';
+            ELEMENT_CORES.forEach(function(ec) {
+                var active = data.elementCore === ec.id;
+                html += '<div class="element-core-slot '+active+'" onclick="setElementCore(\''+ec.id+'\')" title="'+ec.desc+'"><span style="font-size:1.3em">'+ec.icon+'</span><span style="font-size:0.72em">'+ec.name+'</span></div>';
+            });
+            html += '</div></div>';
             if (data.equipmentBag.length === 0) {
-                c.innerHTML = '<div class="equip-empty">还没有掉落装备。击败副本怪物有概率掉落装备，BOSS 关掉率更高。</div>';
+                html += '<div class="equip-empty">还没有掉落装备。击败副本怪物有概率掉落装备，BOSS 关掉率更高。</div>';
             } else {
-                let html = '<div style="font-size:0.74em;color:var(--text3);margin-bottom:8px">点击「装备」穿戴，强化+1 消耗 20+level×10 金币，全属性+10%</div>';
+                html += '<div style="font-size:0.74em;color:var(--text3);margin-bottom:8px">点击「装备」穿戴，强化+1 消耗 20+level×10 金币。分解获得碎片，升级品质提升属性30%</div>';
                 data.equipmentBag.forEach(eq => {
                     const equipped = data.purchased.includes(eq.id);
                     const enhanceCost = 20 + eq.level * 10;
-                    const bonusText = Object.entries(eq.bonus).map(([k,v]) => `${attrLabel(k)}${v>=0?'+':''}${v}${k==='expBonus'?'':'×'+(1+eq.level*0.1).toFixed(1)}`).join(' ');
+                    const quality = getEquipQuality(eq);
+                    const qMult = EQUIP_QUALITY_MULT[quality] || 1;
+                    const bonusText = Object.entries(eq.bonus).map(([k,v]) => `${attrLabel(k)}${v>=0?'+':''}${Math.round(v*qMult)}${k==='expBonus'?'':'×'+(1+eq.level*0.1).toFixed(1)}`).join(' ');
+                    var nextQIdx = EQUIP_QUALITY_ORDER.indexOf(quality);
+                    var canUpgrade = nextQIdx < EQUIP_QUALITY_ORDER.length - 1;
+                    var upgradeCost = nextQIdx === 0 ? '3🟢' : nextQIdx === 1 ? '5🟢2🔵' : '5🔵1🟣';
+                    var upgradeGold = 30 + nextQIdx * 20;
                     html += `<div class="equip-slot ${eq.level>0?'enchanted':''}">
                         <span class="eq-icon">${eq.icon}</span>
-                        <div class="eq-info"><div class="eq-name">${eq.name} ${eq.level>0?`<span class="eq-level">+${eq.level}</span>`:''} ${equipped?'<span style="font-size:0.6em;color:var(--success)">已穿戴</span>':''}</div>
+                        <div class="eq-info"><div class="eq-name">${eq.name} <span class="quality-badge ${quality}">${EQUIP_QUALITY_NAMES[quality]}</span> ${eq.level>0?`<span class="eq-level">+${eq.level}</span>`:''} ${equipped?'<span style="font-size:0.6em;color:var(--success)">已穿戴</span>':''}</div>
                         <div class="eq-bonus">${bonusText}</div></div>
                         <div class="eq-actions">
                             <button class="btn sm ${equipped?'':'accent'}" onclick="toggleEquip('${eq.id}')">${equipped?'卸下':'装备'}</button>
                             <button class="btn sm" onclick="enhanceEquipment('${eq.id}')" ${data.hero.gold<enhanceCost?'disabled':''}>🔨+${eq.level+1}<br><span style="font-size:0.8em">🪙${enhanceCost}</span></button>
+                            ${canUpgrade?'<button class="btn sm" style="background:var(--accent);color:#fff" onclick="upgradeEquipQuality(\''+eq.id+'\')" title="消耗'+upgradeCost+'+'+upgradeGold+'🪙">⬆品质</button>':''}
+                            ${!equipped?'<button class="btn sm danger" onclick="decomposeEquipment(\''+eq.id+'\')" title="分解获得碎片">🔨分解</button>':''}
                         </div>
                     </div>`;
                 });
-                c.innerHTML = html;
             }
+            c.innerHTML = html;
             document.getElementById('equipModal').classList.add('visible');
         }
         function toggleEquip(eqId) {
@@ -7475,12 +9198,14 @@
             data.equipmentBag.forEach(eq => {
                 if (!data.purchased.includes(eq.id)) return;
                 const mult = 1 + eq.level * 0.1;
-                if (eq.bonus.str) s += eq.bonus.str * mult;
-                if (eq.bonus.int) i += eq.bonus.int * mult;
-                if (eq.bonus.con) c += eq.bonus.con * mult;
-                if (eq.bonus.per) p += eq.bonus.per * mult;
-                if (eq.bonus.maxHp) bhp += eq.bonus.maxHp * mult;
-                if (eq.bonus.expBonus) eb += eq.bonus.expBonus * mult;
+                const qMult = EQUIP_QUALITY_MULT[getEquipQuality(eq)] || 1; // 【功能2】品质加成
+                const finalMult = mult * qMult;
+                if (eq.bonus.str) s += eq.bonus.str * finalMult;
+                if (eq.bonus.int) i += eq.bonus.int * finalMult;
+                if (eq.bonus.con) c += eq.bonus.con * finalMult;
+                if (eq.bonus.per) p += eq.bonus.per * finalMult;
+                if (eq.bonus.maxHp) bhp += eq.bonus.maxHp * finalMult;
+                if (eq.bonus.expBonus) eb += eq.bonus.expBonus * finalMult;
             });
             return { s, i, c, p, bhp, eb };
         }
@@ -7616,6 +9341,115 @@
             showToast('🎉 教程完成！开始你的自律冒险吧');
         }
 
+        // ==================== P3: 转生与天赋树视图 ====================
+        function renderRebirth(container) {
+            const rb = data.rebirth || { count: 0, talentPoints: 0, totalTalentPoints: 0 };
+            const canRb = canRebirth();
+            const lifetimes = getLifetimeGoals();
+            const completedLifetimes = lifetimes.filter(lg => lg.completed);
+            let html = `<div class="section-header"><h2>🔄 转生与天赋</h2><p class="subtitle">完成命运主线后可转生，重置等级装备但获得天赋点，永久强化角色</p></div>`;
+            // 转生状态卡片
+            html += `
+            <div class="card" style="margin-bottom:12px;padding:14px 16px;">
+                <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+                    <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#9f7aea,#6b46c1);display:flex;align-items:center;justify-content:center;font-size:1.8em;color:#fff;box-shadow:0 2px 10px rgba(159,122,234,0.3);">🔄</div>
+                    <div style="flex:1;min-width:160px;">
+                        <div style="font-size:1.05em;font-weight:700;">第 ${rb.count} 世轮回</div>
+                        <div style="font-size:0.75em;color:var(--text3);margin-top:3px;">
+                            可用天赋点: <strong style="color:var(--accent);">${rb.talentPoints}</strong> · 累计获得: ${rb.totalTalentPoints}
+                            ${data._keptKnowledgePower > 0 ? ` · 🧠 保留知识之力: ${data._keptKnowledgePower}` : ''}
+                        </div>
+                        <div style="font-size:0.72em;color:var(--success);margin-top:3px;">💰 转生金币加成: +${rb.count * 5}%</div>
+                    </div>
+                    <div>
+                        ${canRb
+                            ? `<button class="btn accent lg" onclick="performRebirth()">🔄 转生</button>`
+                            : `<button class="btn lg" disabled style="opacity:0.5;cursor:not-allowed;">🔒 需完成命运主线</button>`}
+                    </div>
+                </div>
+                ${!canRb ? `<div style="font-size:0.7em;color:var(--text3);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">完成 ${completedLifetimes.length}/${lifetimes.length} 个命运主线 · ${lifetimes.length === 0 ? '请先创建命运主线' : '继续完成命运主线解锁转生'}</div>` : ''}
+            </div>`;
+            // 【功能4】职业分支系统
+            if (rb.count >= 1) {
+                var curClass = HERO_CLASSES[rb.heroClass];
+                html += '<div style="font-weight:700;font-size:0.85em;color:var(--accent);margin:14px 0 8px;">🎓 职业分支</div>';
+                if (curClass) {
+                    html += '<div class="card" style="margin-bottom:10px;padding:10px 14px;border-color:var(--accent);"><div style="display:flex;align-items:center;gap:10px;"><span style="font-size:2em">'+curClass.icon+'</span><div><div style="font-weight:700;font-size:0.88em">'+curClass.name+'</div><div style="font-size:0.72em;color:var(--text3)">'+curClass.desc+'</div></div></div></div>';
+                }
+                html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">';
+                Object.keys(HERO_CLASSES).forEach(function(clsId) {
+                    var cls = HERO_CLASSES[clsId];
+                    var selected = rb.heroClass === clsId;
+                    html += '<div class="class-card '+selected+'" style="flex:1;min-width:100px" onclick="selectHeroClass(\''+clsId+'\')"><div class="class-icon">'+cls.icon+'</div><div style="font-weight:700;font-size:0.8em">'+cls.name+'</div><div style="font-size:0.64em;color:var(--text3);margin-top:4px">'+cls.desc+'</div></div>';
+                });
+                html += '</div>';
+                // 切换费用提示
+                if (rb.heroClass) html += '<div style="font-size:0.68em;color:var(--text3);margin-bottom:8px">切换职业消耗50金币，天赋点将重置</div>';
+            }
+            // 【功能4】分支专精进度
+            html += '<div class="card" style="margin-bottom:10px;padding:10px 14px;"><div style="font-size:0.75em;font-weight:700;margin-bottom:6px;">⚡ 分支专精（每3点激活一层）</div>';
+            TALENT_BRANCHES.forEach(function(branch) {
+                var spec = getBranchSpecialization(branch);
+                var pct = (spec.total % 3) / 3 * 100;
+                var specColor = branch === '力量' ? '#e53935' : branch === '智慧' ? '#1e88e5' : branch === '体质' ? '#43a047' : '#fb8c00';
+                html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:0.75em;font-weight:600;min-width:40px">'+branch+'</span><div class="specialization-bar" style="flex:1"><div class="specialization-fill" style="width:'+pct+'%;background:'+specColor+'"></div></div><span style="font-size:0.65em;color:'+(spec.level>0?'var(--accent)':'var(--text3)')+'">'+spec.total+'/6 '+(spec.level>0?'⚡'+spec.spec.name:'')+'</span></div>';
+            });
+            html += '</div>';
+            // 天赋树
+            html += `<div style="font-weight:700;font-size:0.85em;color:var(--accent);margin:14px 0 8px;">🌳 天赋树</div>`;
+            TALENT_BRANCHES.forEach(branch => {
+                const talents = Object.values(TALENT_TEMPLATES).filter(t => t.branch === branch);
+                if (talents.length === 0) return;
+                html += `<div style="font-weight:600;font-size:0.78em;color:var(--text2);margin:10px 0 5px;">${branch}分支</div>`;
+                talents.forEach(t => {
+                    const lv = getTalentLevel(t.id);
+                    const maxLv = getClassTalentMaxLevel(t.id); // 【功能4】职业上限加成
+                    const maxed = lv >= maxLv;
+                    const canInvest = rb.talentPoints > 0 && !maxed;
+                    const pct = (lv / maxLv) * 100;
+                    html += `
+                    <div class="card" style="margin-bottom:8px;padding:10px 12px;${maxed?'border-color:var(--accent);':''}">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <span style="font-size:1.5em;">${t.icon}</span>
+                            <div style="flex:1;min-width:120px;">
+                                <div style="display:flex;align-items:center;gap:6px;">
+                                    <strong style="font-size:0.85em;">${t.name}</strong>
+                                    <span style="font-size:0.68em;color:var(--text3);">Lv.${lv}/${maxLv}</span>
+                                    ${maxed?'<span class="tag easy" style="font-size:0.6em;">MAX</span>':''}
+                                </div>
+                                <div style="font-size:0.7em;color:var(--text3);margin-top:2px;">${t.desc}</div>
+                                <div class="bar-track" style="height:5px;margin-top:5px;"><div class="bar-fill" style="width:${pct}%;background:linear-gradient(90deg,#9f7aea,#6b46c1);"></div></div>
+                            </div>
+                            <button class="btn sm ${canInvest?'accent':''}" ${canInvest?'':'disabled'} style="${!canInvest?'opacity:0.4;cursor:not-allowed;':''}" onclick="investTalent('${t.id}')">
+                                ${maxed?'已满':`+1 (1点)`}
+                            </button>
+                        </div>
+                    </div>`;
+                });
+            });
+            // 【功能2b】轮回商店
+            html += '<div style="font-weight:700;font-size:0.85em;color:var(--accent);margin:14px 0 8px;">🏪 轮回商店</div>';
+            html += '<div class="card" style="margin-bottom:10px;padding:12px 14px;"><div style="font-size:0.72em;color:var(--text3);margin-bottom:8px">转生点数: <strong style="color:var(--accent)">'+(rb.rebirthPoints||0)+'</strong> · 传奇碎片: '+(data.rebirthShop&&data.rebirthShop.skillShards||0)+'/5</div>';
+            REBIRTH_SHOP_ITEMS.forEach(function(item) {
+                var costLabel = item.costType === 'points' ? item.cost+'转生点' : item.cost+'🪙';
+                html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;padding:6px 0;border-bottom:1px solid var(--border)"><div style="flex:1"><div style="font-size:0.8em;font-weight:600">'+item.name+'</div><div style="font-size:0.66em;color:var(--text3)">'+item.desc+'</div></div><button class="btn sm accent" onclick="buyRebirthShopItem(\''+item.id+'\')">'+costLabel+'</button></div>';
+            });
+            html += '</div>';
+            // 转生说明
+            html += `
+            <div class="card" style="margin-top:12px;padding:12px 14px;background:var(--accent-light);">
+                <div style="font-size:0.75em;color:var(--text2);line-height:1.6;">
+                    <strong>📖 转生规则：</strong><br>
+                    • 转生条件：至少完成 1 个命运主线<br>
+                    • 重置内容：等级、装备、副本进度、金币（保留10%）<br>
+                    • 保留内容：宠物、成就、称号、证书技能、图鉴、MBTI<br>
+                    • 永久加成：知识之力保留20% + 每次转生金币掉落+5% + 1天赋点<br>
+                    • 天赋点可在天赋树永久投资，转生后依然生效
+                </div>
+            </div>`;
+            container.innerHTML = html;
+        }
+
         // ==================== 移动端底部导航 ====================
         function renderMobileNav() {
             const scroll = document.getElementById('mobileNavScroll');
@@ -7630,6 +9464,7 @@
                 { view:'certSkills', icon:'📜', label:'证书' },
                 { view:'knowledgeTree', icon:'🌳', label:'真理' },
                 { view:'lifetime', icon:'⭐', label:'命运' },
+                { view:'rebirth', icon:'🔄', label:'转生' },
                 { view:'achievements', icon:'🏆', label:'成就' },
                 { view:'bestiary', icon:'📖', label:'图鉴' },
             ];
@@ -7716,15 +9551,58 @@
             document.getElementById('pwaInstallBanner').classList.remove('visible');
             localStorage.setItem('pwa_install_dismissed', '1');
         }
-        // Service Worker 注册
+        // Service Worker 注册 — P1: 版本更新通知
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').then(() => {
+                navigator.serviceWorker.register('./sw.js').then((reg) => {
                     console.log('✅ Service Worker 已注册，支持离线使用');
+                    // P1: 监听新 Service Worker 安装
+                    reg.addEventListener('updatefound', () => {
+                        const newWorker = reg.installing;
+                        if (!newWorker) return;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // 新版本已下载，提示用户刷新
+                                showUpdateToast();
+                            }
+                        });
+                    });
                 }).catch((err) => {
                     console.log('SW 注册失败（不影响正常使用）:', err.message);
                 });
+                // P1: 监听 SW 激活消息
+                navigator.serviceWorker.addEventListener('message', (event) => {
+                    if (event.data && event.data.type === 'SW_UPDATED') {
+                        showUpdateToast();
+                    }
+                });
+                // P1: 页面加载时检测是否有等待中的新 SW
+                navigator.serviceWorker.ready.then((reg) => {
+                    if (reg.waiting) showUpdateToast();
+                });
             });
+        }
+
+        // P1: 显示版本更新 Toast（带刷新按钮）
+        function showUpdateToast() {
+            // 避免重复弹出
+            if (document.getElementById('updateToast')) return;
+            const toast = document.createElement('div');
+            toast.id = 'updateToast';
+            toast.style.cssText = 'position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--accent);border-radius:var(--radius);padding:10px 16px;display:flex;align-items:center;gap:10px;z-index:2000;box-shadow:var(--shadow-lg);animation:slideUp 0.3s ease';
+            toast.innerHTML = `
+                <span style="font-size:1.2em;">🆕</span>
+                <span style="font-size:0.82em;color:var(--text);">发现新版本</span>
+                <button class="btn sm accent" onclick="applyUpdate()">刷新</button>
+                <button class="btn sm" onclick="this.parentElement.remove()">稍后</button>
+            `;
+            document.body.appendChild(toast);
+        }
+        function applyUpdate() {
+            if (navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
+            }
+            window.location.reload();
         }
 
         // ==================== 反馈渠道 ====================
@@ -7747,6 +9625,9 @@
         render();
         updateHeroPanel();
         renderMobileNav();
+        restoreScene(); // 【功能五】恢复场景主题
+        restoreFocusState(); // 【功能一】恢复专注计时器状态
+        tryGenerateDailyNarrative(); // 【功能三】生成今日叙事日志
         // 隐藏加载动画
         requestAnimationFrame(() => {
             setTimeout(() => {
