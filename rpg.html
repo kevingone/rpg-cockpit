@@ -2608,6 +2608,66 @@
         @media (max-width: 640px) { .pwa-install-banner { padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); } .mobile-nav { bottom: 0; } .pwa-install-banner.visible ~ .mobile-nav { bottom: 76px; } }
         @keyframes slideUp { from{transform:translateY(100%);} to{transform:translateY(0);} }
 
+        /* ==================== 安装引导弹窗 ==================== */
+        .install-guide-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 9999;
+            display: none; align-items: center; justify-content: center;
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        }
+        .install-guide-modal.visible { display: flex; animation: fadeIn 0.25s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .install-guide-card {
+            background: var(--panel); border: 1px solid var(--border);
+            border-radius: var(--radius-lg, 16px); padding: 24px 20px;
+            max-width: 380px; width: 90%; text-align: center;
+            box-shadow: var(--shadow-lg);
+            animation: cardPopIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes cardPopIn { from { transform: scale(0.85) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+        .install-guide-card .ig-icon { font-size: 3em; margin-bottom: 8px; }
+        .install-guide-card .ig-title { font-size: 1.1em; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+        .install-guide-card .ig-subtitle { font-size: 0.76em; color: var(--text3); margin-bottom: 18px; }
+        .install-step {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 14px; margin-bottom: 8px;
+            background: var(--panel2); border: 1px solid var(--border);
+            border-radius: var(--radius); text-align: left;
+        }
+        .install-step .ig-step-num {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--accent); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8em; font-weight: 700; flex-shrink: 0;
+        }
+        .install-step .ig-step-icon { font-size: 1.6em; flex-shrink: 0; }
+        .install-step .ig-step-text { font-size: 0.78em; color: var(--text2); line-height: 1.5; }
+        .install-step .ig-step-text strong { color: var(--text); }
+        .install-guide-card .ig-actions { margin-top: 16px; display: flex; gap: 8px; justify-content: center; }
+        .install-guide-card .ig-bonus {
+            margin-top: 12px; padding: 8px 12px; border-radius: var(--radius);
+            background: var(--accent-light); font-size: 0.7em; color: var(--accent);
+            font-weight: 600;
+        }
+        /* 下载按钮（顶栏） */
+        .download-app-btn {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 5px 10px; border: 1px solid var(--accent);
+            border-radius: var(--radius-xs); background: var(--accent-light);
+            cursor: pointer; font-size: 0.73em; font-family: inherit;
+            color: var(--accent); font-weight: 600; transition: all var(--transition);
+            white-space: nowrap;
+        }
+        .download-app-btn:hover {
+            background: var(--accent); color: #fff;
+            box-shadow: var(--glow-accent, 0 0 8px rgba(184,115,11,0.3));
+        }
+        .download-app-btn:active { transform: scale(0.95); }
+        /* 移动端下载入口 */
+        .mn-item.download-item { color: var(--accent); }
+        .mn-item.download-item .mn-icon { animation: downloadBounce 2s infinite; }
+        @keyframes downloadBounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-3px);} }
+
         /* ==================== 反馈渠道 ==================== */
         .feedback-fab { position: fixed; right: 14px; bottom: calc(80px + env(safe-area-inset-bottom, 0px)); z-index: 800; width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--accent); color: #fff; font-size: 1.3em; cursor: pointer; box-shadow: var(--shadow-lg); display: flex; align-items: center; justify-content: center; transition: var(--transition); }
         .feedback-fab:hover { transform: scale(1.1); box-shadow: 0 4px 16px rgba(184,115,11,0.4); }
@@ -2731,6 +2791,7 @@
         <button onclick="document.getElementById('fileInput').click()">📥 导入</button>
         <input type="file" id="fileInput" accept=".json" style="display:none" onchange="importData(event)">
         <button onclick="toggleTheme()" id="themeBtn">🌙</button>
+        <button class="download-app-btn" id="downloadAppBtn" onclick="openInstallGuide()" title="下载应用到桌面">📱 下载App</button>
         <button onclick="openThemePanel()" title="世界观主题" style="font-size:0.9em;">🎨</button>
         <button onclick="replayTutorial()" title="重播新手教程">📖</button>
         <button class="accent" onclick="openShop()">🏪 商店</button>
@@ -2842,6 +2903,20 @@
         <div class="pwa-actions">
             <button class="btn sm accent" onclick="installPWA()">安装</button>
             <button class="btn sm" onclick="dismissPWAInstall()">稍后</button>
+        </div>
+    </div>
+    <!-- 安装引导弹窗 -->
+    <div class="install-guide-modal" id="installGuideModal" onclick="if(event.target===this)closeInstallGuide()">
+        <div class="install-guide-card">
+            <div class="ig-icon" id="igIcon">📱</div>
+            <div class="ig-title" id="igTitle">添加到主屏幕</div>
+            <div class="ig-subtitle" id="igSubtitle">像原生 App 一样使用，离线可玩、全屏沉浸</div>
+            <div id="igSteps"></div>
+            <div class="ig-bonus">🎁 安装后：离线可用 · 全屏沉浸 · 桌面图标一键启动</div>
+            <div class="ig-actions">
+                <button class="btn accent" id="igActionBtn" onclick="installPWAFromGuide()">立即安装</button>
+                <button class="btn" onclick="closeInstallGuide()">关闭</button>
+            </div>
         </div>
     </div>
     <!-- 反馈悬浮按钮 -->
@@ -10176,6 +10251,7 @@
             html += '<div style="font-size:1em;font-weight:700;margin-bottom:14px;color:var(--accent);">🔥 篝火 · 快速设置</div>';
             html += '<div style="display:flex;flex-direction:column;gap:8px;">';
             html += '<button class="btn accent" onclick="saveData();showToast(\'💾 已手动存档\');" style="justify-content:flex-start;">💾 手动存档</button>';
+            html += '<button class="btn" onclick="openInstallGuide();document.getElementById(\'quickSettingsModal\').remove();" style="justify-content:flex-start;">📱 下载到桌面</button>';
             html += '<button class="btn" onclick="exportData()" style="justify-content:flex-start;">📦 导出存档</button>';
             html += '<button class="btn" onclick="document.getElementById(\'fileInput\').click()" style="justify-content:flex-start;">📥 导入存档</button>';
             html += '<button class="btn" onclick="openThemePanel();document.getElementById(\'quickSettingsModal\').remove();" style="justify-content:flex-start;">🎨 切换主题</button>';
@@ -10888,7 +10964,7 @@
                 { view:'achievements', icon:'🏆', label:'成就' },
                 { view:'bestiary', icon:'📖', label:'图鉴' },
             ];
-            scroll.innerHTML = items.map(it => `<div class="mn-item ${currentView===it.view?'active':''}" onclick="switchView('${it.view}')"><span class="mn-icon">${it.icon}</span><span>${it.label}</span></div>`).join('') + `<div class="mn-item" onclick="openShop()"><span class="mn-icon">🏪</span><span>商店</span></div>`;
+            scroll.innerHTML = items.map(it => `<div class="mn-item ${currentView===it.view?'active':''}" onclick="switchView('${it.view}')"><span class="mn-icon">${it.icon}</span><span>${it.label}</span></div>`).join('') + `<div class="mn-item" onclick="openShop()"><span class="mn-icon">🏪</span><span>商店</span></div>` + `<div class="mn-item download-item" onclick="openInstallGuide()"><span class="mn-icon">📱</span><span>下载App</span></div>`;
         }
 
         // ==================== 浏览器桌面通知 ====================
@@ -10941,15 +11017,42 @@
 
         // ==================== PWA 安装与 Service Worker ====================
         let deferredInstallPrompt = null;
+
+        // 平台检测
+        function isIOS() {
+            var ua = navigator.userAgent.toLowerCase();
+            return /iphone|ipad|ipod/.test(ua) || (ua.includes('mac') && 'ontouchend' in document);
+        }
+        function isAndroid() {
+            return /android/.test(navigator.userAgent.toLowerCase());
+        }
+        function isStandalone() {
+            return window.matchMedia('(display-mode: standalone)').matches ||
+                   window.navigator.standalone === true ||
+                   document.referrer.includes('android-app://');
+        }
+        function isSafari() {
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.includes('safari') && !ua.includes('chrome') && !ua.includes('crios') && !ua.includes('fxios');
+        }
+
+        // 已安装则隐藏下载按钮
+        if (isStandalone()) {
+            document.addEventListener('DOMContentLoaded', function() {
+                var btn = document.getElementById('downloadAppBtn');
+                if (btn) btn.style.display = 'none';
+            });
+        }
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredInstallPrompt = e;
             // 已安装或已 dismiss 则不显示
             if (localStorage.getItem('pwa_install_dismissed') === '1') return;
-            if (window.matchMedia('(display-mode: standalone)').matches) return;
+            if (isStandalone()) return;
             // 延迟显示安装提示（等用户浏览一会后再弹）
             setTimeout(() => {
-                if (deferredInstallPrompt) {
+                if (deferredInstallPrompt && !isStandalone()) {
                     document.getElementById('pwaInstallBanner').classList.add('visible');
                 }
             }, 8000);
@@ -10957,10 +11060,17 @@
         window.addEventListener('appinstalled', () => {
             document.getElementById('pwaInstallBanner').classList.remove('visible');
             deferredInstallPrompt = null;
+            closeInstallGuide();
             showToast('🎉 安装成功！下次可直接从桌面启动');
+            // 隐藏下载按钮
+            var btn = document.getElementById('downloadAppBtn');
+            if (btn) btn.style.display = 'none';
         });
         function installPWA() {
-            if (!deferredInstallPrompt) { showToast('请使用浏览器菜单的「安装应用 / 添加到主屏幕」'); return; }
+            if (!deferredInstallPrompt) {
+                openInstallGuide();
+                return;
+            }
             deferredInstallPrompt.prompt();
             deferredInstallPrompt.userChoice.then(() => {
                 deferredInstallPrompt = null;
@@ -10970,6 +11080,112 @@
         function dismissPWAInstall() {
             document.getElementById('pwaInstallBanner').classList.remove('visible');
             localStorage.setItem('pwa_install_dismissed', '1');
+        }
+
+        // ==================== 安装引导弹窗 ====================
+        function openInstallGuide() {
+            // 已安装则提示
+            if (isStandalone()) {
+                showToast('✅ 已经在 App 模式中运行了！');
+                return;
+            }
+
+            var modal = document.getElementById('installGuideModal');
+            var iconEl = document.getElementById('igIcon');
+            var titleEl = document.getElementById('igTitle');
+            var subtitleEl = document.getElementById('igSubtitle');
+            var stepsEl = document.getElementById('igSteps');
+            var actionBtn = document.getElementById('igActionBtn');
+            var stepsHtml = '';
+
+            if (isIOS()) {
+                // iOS Safari 引导
+                iconEl.textContent = '🍎';
+                titleEl.textContent = '添加到主屏幕';
+                subtitleEl.textContent = 'iOS Safari 不支持一键安装，请按以下步骤操作';
+                stepsHtml = '';
+                if (isSafari()) {
+                    // Safari 浏览器
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">1</div><div class="ig-step-icon">⬆️</div><div class="ig-step-text">点击底部工具栏的 <strong>分享按钮</strong>（向上箭头图标）</div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">2</div><div class="ig-step-icon">➕</div><div class="ig-step-text">在弹出的菜单中找到并点击 <strong>「添加到主屏幕」</strong></div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">3</div><div class="ig-step-icon">✅</div><div class="ig-step-text">点击右上角 <strong>「添加」</strong>，桌面即可看到 RPG 驾驶舱图标</div></div>';
+                } else {
+                    // Chrome/其他浏览器 on iOS
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">1</div><div class="ig-step-icon">📋</div><div class="ig-step-text">点击浏览器右下角的 <strong>更多菜单</strong>（··· 图标）</div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">2</div><div class="ig-step-icon">➕</div><div class="ig-step-text">在菜单中选择 <strong>「添加到主屏幕」</strong> 或 <strong>「添加到主屏幕」</strong></div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">3</div><div class="ig-step-icon"> Safari</div><div class="ig-step-text">iOS 上推荐使用 <strong>Safari 浏览器</strong> 打开本页面，体验最佳</div></div>';
+                }
+                actionBtn.style.display = 'none'; // iOS 无法直接触发安装
+            } else if (isAndroid()) {
+                // Android 引导
+                iconEl.textContent = '🤖';
+                titleEl.textContent = '安装到桌面';
+                subtitleEl.textContent = '安装后可离线使用，像原生 App 一样体验';
+                if (deferredInstallPrompt) {
+                    // 可以直接安装
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">1</div><div class="ig-step-icon">📲</div><div class="ig-step-text">点击下方 <strong>「立即安装」</strong> 按钮</div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">2</div><div class="ig-step-icon">✅</div><div class="ig-step-text">在弹窗中确认 <strong>「安装」</strong> 即可</div></div>';
+                    actionBtn.style.display = '';
+                    actionBtn.textContent = '立即安装';
+                } else {
+                    // 需要手动操作
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">1</div><div class="ig-step-icon">⋮</div><div class="ig-step-text">点击浏览器右上角的 <strong>菜单按钮</strong>（三个点）</div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">2</div><div class="ig-step-icon">➕</div><div class="ig-step-text">选择 <strong>「添加到主屏幕」</strong> 或 <strong>「安装应用」</strong></div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">3</div><div class="ig-step-icon">✅</div><div class="ig-step-text">确认后桌面会出现 RPG 驾驶舱图标</div></div>';
+                    actionBtn.style.display = 'none';
+                }
+            } else {
+                // 桌面端引导
+                iconEl.textContent = '💻';
+                titleEl.textContent = '安装到桌面';
+                subtitleEl.textContent = '安装后可离线使用，像独立应用一样运行';
+                if (deferredInstallPrompt) {
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">1</div><div class="ig-step-icon">📲</div><div class="ig-step-text">点击下方 <strong>「立即安装」</strong> 按钮</div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">2</div><div class="ig-step-icon">✅</div><div class="ig-step-text">在浏览器弹窗中点击 <strong>「安装」</strong></div></div>';
+                    actionBtn.style.display = '';
+                    actionBtn.textContent = '立即安装';
+                } else {
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">1</div><div class="ig-step-icon">⊕</div><div class="ig-step-text">点击浏览器地址栏右侧的 <strong>安装图标</strong>（⊕）</div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">2</div><div class="ig-step-icon">☰</div><div class="ig-step-text">或通过浏览器菜单 → <strong>「安装 RPG 驾驶舱...」</strong></div></div>';
+                    stepsHtml += '<div class="install-step"><div class="ig-step-num">3</div><div class="ig-step-icon">✅</div><div class="ig-step-text">确认安装后，桌面/开始菜单会出现应用图标</div></div>';
+                    actionBtn.style.display = 'none';
+                }
+            }
+
+            stepsEl.innerHTML = stepsHtml;
+            modal.classList.add('visible');
+            // 记录已展示过
+            localStorage.setItem('pwa_guide_shown', '1');
+        }
+        function closeInstallGuide() {
+            var modal = document.getElementById('installGuideModal');
+            if (modal) modal.classList.remove('visible');
+        }
+        function installPWAFromGuide() {
+            if (deferredInstallPrompt) {
+                deferredInstallPrompt.prompt();
+                deferredInstallPrompt.userChoice.then(() => {
+                    deferredInstallPrompt = null;
+                    closeInstallGuide();
+                    document.getElementById('pwaInstallBanner').classList.remove('visible');
+                });
+            } else {
+                closeInstallGuide();
+                showToast('请按上方步骤操作，或使用浏览器菜单安装');
+            }
+        }
+
+        // iOS 自动弹出引导（首次访问且未 dismiss）
+        function maybeShowIOSInstallGuide() {
+            if (!isIOS()) return;
+            if (isStandalone()) return;
+            if (localStorage.getItem('pwa_install_dismissed') === '1') return;
+            if (localStorage.getItem('pwa_guide_shown') === '1') return;
+            setTimeout(() => {
+                if (!isStandalone() && localStorage.getItem('pwa_guide_shown') !== '1') {
+                    openInstallGuide();
+                }
+            }, 15000); // 15秒后自动弹出
         }
         // Service Worker 注册 — P1: 版本更新通知
         if ('serviceWorker' in navigator) {
@@ -11055,6 +11271,7 @@
         initBgParticles(); // RPG 2.0: 背景粒子系统
         updateWorldClock(); // RPG 2.0: 世界时钟
         setInterval(updateWorldClock, 30000); // 每30秒更新时钟
+        maybeShowIOSInstallGuide(); // PWA: iOS自动弹出安装引导
         restoreScene(); // 【功能五】恢复场景主题
         restoreFocusState(); // 【功能一】恢复专注计时器状态
         tryGenerateDailyNarrative(); // 【功能三】生成今日叙事日志
