@@ -1,5 +1,5 @@
 // RPG 自律驾驶舱 Service Worker — P1: Stale-While-Revalidate + 版本更新通知
-const CACHE_NAME = 'rpg-cockpit-v2';
+const CACHE_NAME = 'rpg-cockpit-v3';
 const CORE_ASSETS = ['./rpg.html', './manifest.json'];
 
 // 安装：预缓存核心资源，跳过等待立即激活
